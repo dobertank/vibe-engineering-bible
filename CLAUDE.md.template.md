@@ -93,6 +93,20 @@
 Если задача требует доступа к продакшен-данным, протоколу деплоя, секретам —
 ОТКАЖИСЬ и попроси человека выполнить шаг.
 
+**Для T2+ изменений** (новые capabilities, изменения API/контрактов, модели
+данных или security-границ) перед `act` создаётся пакет артефактов
+в `openspec/changes/<kebab-name>/`:
+
+- `proposal.md` — Why / What Changes / Impact
+- `specs/<capability>/spec.md` — delta: ADDED / MODIFIED / REMOVED Requirements
+  (SHALL/MUST + сценарии GIVEN/WHEN/THEN)
+- `design.md` — как реализуем (для нетривиальных решений)
+- `tasks.md` — нумерованный чек-лист реализации
+
+Только после approve proposal — `act`. Slash-команды `/opsx:propose`,
+`/opsx:apply`, `/opsx:archive` (paved road — Fission-AI OpenSpec). См. §4
+«Библии».
+
 ## 6. Definition of Done для этой зоны
 
 {{Скопируй из DoD-таблицы §3 «Библии» строки, помеченные ✓ для зоны этого
