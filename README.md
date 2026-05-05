@@ -1,4 +1,4 @@
-# vibible
+# Vibe engineering bible
 
 Корпоративная политика по работе с AI-ассистентами (Claude Code, Cursor, Codex, Claude Cowork). Документационный репо: кода, тестов, сборки здесь нет.
 
