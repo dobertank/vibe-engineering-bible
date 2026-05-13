@@ -53,7 +53,7 @@
 ### 5.2. Фаза 1. Bootstrap (1–2 недели)
 
 - **Цель.** Зафиксировать в каждом активном репо: CLAUDE.md (универсальный шаблон) + lifecycle-метку (T0/T1/T2/T3).
-- **Что появляется.** `CLAUDE.md` в корне (копия `CLAUDE.md.template.md`, заполнены §1 контекст и §2 стек, §8 пусто); тег зоны в первой строке; sunset-дата в README для T1+; Conventional Commits.
+- **Что появляется.** `CLAUDE.md` в корне (копия `templates/CLAUDE.md.template.md`, заполнены §1 контекст и §2 стек, §8 пусто); тег зоны в первой строке; sunset-дата в README для T1+; Conventional Commits.
 - **Роли.** Owner; co-owner для команды 2–10.
 - **Gate-критерий выхода.** В каждом активном репо — CLAUDE.md + lifecycle-метка; 0 бесхозных репо.
 - **KPI фазы.** 100% активных репо имеют CLAUDE.md; 0 «бесхозных» репо в продакшене.
@@ -111,7 +111,7 @@
 - **Цель.** На пилоте отработать paved road, развернуть **minimal viable AI-Gateway**, потом раскатать на все T2/T3. Все ворота — advisory.
 - **Что появляется.**
   - **Minimal viable AI-Gateway** — централизованная точка вызова LLM-провайдеров. Не полноценный enterprise-шлюз; цель — закрыть три риска: (а) фильтрация секретов в исходящем промпте, (б) аудит-лог промптов/ответов, (в) единая точка для allow-list инструментов и моделей. Кандидаты: open-source self-hosted (LiteLLM, Portkey, Helicone) или SaaS внутри корпоративного аккаунта (Anthropic Console workspace, OpenAI Org workspace) с принудительным SSO. Развёртывание — 1–2 человеко-недели, не квартал.
-  - `CLAUDE.md.template.md` (универсальный) — копируется в пилот; в §4.1 явно фиксируется «вызовы LLM — только через `<имя AI-Gateway>`; внешние ChatGPT/Gemini/Perplexity напрямую запрещены». Затем — во все T2/T3.
+  - `templates/CLAUDE.md.template.md` (универсальный) — копируется в пилот; в §4.1 явно фиксируется «вызовы LLM — только через `<имя AI-Gateway>`; внешние ChatGPT/Gemini/Perplexity напрямую запрещены». Затем — во все T2/T3.
   - CI-laws (advisory): `[ai]`-tag в title PR (warn); `Assisted-by:`-trailer в коммитах (warn); PR-size warning ≥400 LOC; slopsquatting-check на новые импорты (Socket.dev / Snyk / самописный против списка известных hallucinated names); license scan (FOSSA / Snyk).
   - PR-template с обязательными полями «AI-инструменты / что я лично проверил / как тестировал».
   - Список paved-road языков (2–3) опубликован в общем wiki.
@@ -172,7 +172,7 @@
 - **Что появляется.**
   - **Корпоративный AI-Gateway** — централизованный шлюз ко всем LLM-провайдерам с логированием, фильтрацией секретов, квотами, атрибуцией расходов, SSO.
   - **Allow-list AI-инструментов** (Claude Code, Cursor, Codex и т.д.) и **allow-list MCP-серверов** (см. CVE-2025-* в Appendix D библии — `CurXecute`, `mcp-remote`, `EscapeRoute`).
-  - **Библия опубликована как корпоративный стандарт** (внутреннее издание); `CLAUDE.md.template.md` и `CLAUDE.md.template.enterprise.md` лежат в общем артефакт-репозитории.
+  - **Библия опубликована как корпоративный стандарт** (внутреннее издание); `templates/CLAUDE.md.template.md` и `templates/CLAUDE.md.template.enterprise.md` лежат в общем артефакт-репозитории.
   - **PR-template** организационного уровня с обязательными полями «AI-инструменты / что я лично проверил / как тестировал».
   - **AI-Code Guild сформирована**: 5–10 человек (Principal+), явная хартия, owner библии и шаблонов; ежеквартальный пересмотр.
 - **Роли.**
@@ -267,7 +267,7 @@
 | 1 | Бизнес-приоритеты сместились на полпути; внедрение бросают | Executive sponsor + ежеквартальный sponsor-review с явной go/no-go-точкой |
 | 2 | Champion-burnout: ключевой Champion уходит, Tribe откатывается | 2 Champion-а на Tribe (минимум для крупной); явная замена в хартии |
 | 3 | Толерантность к нарушениям: первый раз сквозь пальцы → норма | Грехи §4½ библии — нормированный шорткод-язык; решение «закрыть/не закрыть PR» по таблице, не по ситуации |
-| 4 | Drift: библия эволюционирует, шаблоны и CLAUDE.md в репо — нет | Quarterly diff `library/CLAUDE.md.template.md` vs `ваш/CLAUDE.md` в каталоге; алёрт при расхождении |
+| 4 | Drift: библия эволюционирует, шаблоны и CLAUDE.md в репо — нет | Quarterly diff `library/templates/CLAUDE.md.template.md` vs `ваш/CLAUDE.md` в каталоге; алёрт при расхождении |
 | 5 | Vendor-lock-in AI-Gateway на одного провайдера | Provider-agnostic API внутри Gateway (LiteLLM как абстрактный слой); миграционный path в backlog |
 | 6 | Регуляторное изменение (AI Act, отраслевое) в середине внедрения | Appendix D библии — точка отслеживания публикаций; ежеквартальный обзор Guild «что нового среди источников?» |
 
@@ -280,7 +280,7 @@
 - DoD-таблица по T0–T3 — §5.
 - Spec-driven workflow — §6.
 - Чек-лист ревьюера AI-кода — §7.
-- Шаблоны `CLAUDE.md.template.md` и `CLAUDE.md.template.enterprise.md` — §8 библии + сами файлы.
+- Шаблоны `templates/CLAUDE.md.template.md` и `templates/CLAUDE.md.template.enterprise.md` — §8 библии + сами файлы.
 - T3-релиз для крупной орг (ИФТ/НТ/PoB/4 заключения) — Appendix A.
 - Источники цифр и CVE — Appendix D.
 

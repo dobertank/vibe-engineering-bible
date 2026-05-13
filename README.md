@@ -8,16 +8,16 @@
 ## Содержание
 
 - **[`vibe-engineering-bible.md`](./vibe-engineering-bible.md)** — каноническая «библия». Структура — два завета: **Завет Свободы** (T0, vibe coding) задаёт минимальные правила для личного эксперимента; **Завет Дисциплины** (T1+, vibe engineering) — восемь заповедей, тринадцать грехов (§4½, нормированный шорткодный язык отказа в мердже), DoD по уровням, spec-driven workflow, чек-лист ревьюера AI-кода, baseline-шаблон, KPI масштабирования, глоссарий. Корпоративная специфика (регламентированный T3-релиз, 12-месячный план развёртывания, конкретный paved-road-стек) вынесена в Appendix A–C; источники цифр и кейсов — в Appendix D.
-- **[`CLAUDE.md.template.md`](./CLAUDE.md.template.md)** — **универсальный** baseline-шаблон. Дефолт. Без зависимости от Backstage, AI-Gateway, корп-Slack-каналов, обязательного PR-шаблона. Подходит соло-разработчику, OSS-мейнтейнеру, команде из 5 человек.
-- **[`CLAUDE.md.template.enterprise.md`](./CLAUDE.md.template.enterprise.md)** — **корпоративный** baseline-шаблон. Берётся, если у вас развёрнуты каталог сервисов (Backstage), AI-Gateway, корп-Slack-каналы, политика обязательного PR-template — все эти слои в нём предполагаются.
+- **[`templates/CLAUDE.md.template.md`](./templates/CLAUDE.md.template.md)** — **универсальный** baseline-шаблон. Дефолт. Без зависимости от Backstage, AI-Gateway, корп-Slack-каналов, обязательного PR-шаблона. Подходит соло-разработчику, OSS-мейнтейнеру, команде из 5 человек.
+- **[`templates/CLAUDE.md.template.enterprise.md`](./templates/CLAUDE.md.template.enterprise.md)** — **корпоративный** baseline-шаблон. Берётся, если у вас развёрнуты каталог сервисов (Backstage), AI-Gateway, корп-Slack-каналы, политика обязательного PR-template — все эти слои в нём предполагаются.
 
 ## Как пользоваться
 
 **Команды продуктовых репо.**
 
 1. Выберите шаблон:
-   - **Дефолт — `CLAUDE.md.template.md`** (универсальный).
-   - `CLAUDE.md.template.enterprise.md` — если у вас уже есть Backstage / AI-Gateway / обязательные корп-Slack-каналы.
+   - **Дефолт — `templates/CLAUDE.md.template.md`** (универсальный).
+   - `templates/CLAUDE.md.template.enterprise.md` — если у вас уже есть Backstage / AI-Gateway / обязательные корп-Slack-каналы.
 2. Скопируйте выбранный шаблон в корень своего репо как `CLAUDE.md` (для Claude Code) и/или `AGENTS.md` (для Codex/Cursor/прочих, поддерживающих `agents.md`).
 3. Заполните только раздел 8 («Репо-специфика»). Разделы 1–7 — корпоративная часть, не редактируйте.
 4. Сверьтесь с библией по DoD своей зоны (T1/T2/T3) — §5 библии (универсальное ядро) и Appendix A (если у вас регламентированный T3-релиз).
