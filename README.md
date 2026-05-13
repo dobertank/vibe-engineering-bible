@@ -1,5 +1,7 @@
 # Vibe engineering bible
 
+![From Vibe Chaos to Engineering Order](./assets/banner-en.jpg)
+
 A policy for working with AI assistants (Claude Code, Cursor, Codex, Claude Cowork,
 and others) for teams of any size — solo developer, OSS maintainer, a team of 5
 or 5000 people. This is a documentation-only repo: no code, tests, or build here.
