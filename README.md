@@ -1,32 +1,31 @@
 # Vibe engineering bible
 
-Политика по работе с AI-ассистентами (Claude Code, Cursor, Codex, Claude Cowork
-и других) для команд любого размера — соло-разработчик, OSS-мейнтейнер,
-команда из 5 или 5000 человек. Документационный репо: кода, тестов, сборки
-здесь нет.
+A policy for working with AI assistants (Claude Code, Cursor, Codex, Claude Cowork,
+and others) for teams of any size — solo developer, OSS maintainer, a team of 5
+or 5000 people. This is a documentation-only repo: no code, tests, or build here.
 
-## Содержание
+## Contents
 
-- **[`vibe-engineering-bible.md`](./vibe-engineering-bible.md)** — каноническая «библия». Структура — два завета: **Завет Свободы** (T0, vibe coding) задаёт минимальные правила для личного эксперимента; **Завет Дисциплины** (T1+, vibe engineering) — восемь заповедей, тринадцать грехов (§4½, нормированный шорткодный язык отказа в мердже), DoD по уровням, spec-driven workflow, чек-лист ревьюера AI-кода, baseline-шаблон, KPI масштабирования, глоссарий. Источники цифр и кейсов — в Appendix D.
-- **[`templates/CLAUDE.md.template.md`](./templates/CLAUDE.md.template.md)** — baseline-шаблон для AI-агентов в продуктовом репо. Применим в команде любого размера.
+- **[`vibe-engineering-bible.md`](./vibe-engineering-bible.md)** — the canonical "bible". Structured as two covenants: the **Covenant of Freedom** (T0, vibe coding) sets minimal rules for personal experiments; the **Covenant of Discipline** (T1+, vibe engineering) covers eight commandments, thirteen sins (§4½, a normalized shortcode vocabulary for merge rejections), DoD by tier, spec-driven workflow, an AI-code reviewer checklist, the baseline template, scaling KPIs, and a glossary. Sources for figures and cases are in Appendix D.
+- **[`templates/CLAUDE.md.template.md`](./templates/CLAUDE.md.template.md)** — baseline template for AI agents in a product repo. Applies to a team of any size.
 
-## Как пользоваться
+## How to use
 
-**Команды продуктовых репо.**
+**Product-repo teams.**
 
-1. Скопируйте `templates/CLAUDE.md.template.md` в корень своего репо как `CLAUDE.md` (для Claude Code) и/или `AGENTS.md` (для Codex/Cursor/прочих, поддерживающих `agents.md`).
-2. Заполните только раздел 8 («Репо-специфика»). Разделы 1–7 — общая часть, не редактируйте.
-3. Сверьтесь с библией по DoD своей зоны (T1/T2/T3) — §5 библии.
+1. Copy `templates/CLAUDE.md.template.md` into the root of your repo as `CLAUDE.md` (for Claude Code) and/or `AGENTS.md` (for Codex/Cursor/others that support `agents.md`).
+2. Fill in section 8 ("Repo-specific") only. Sections 1–7 are the shared baseline — do not edit them.
+3. Cross-reference your tier's DoD (T1/T2/T3) against §5 of the bible.
 
-**Внешним читателям.** Ядро библии (§§1–10) — self-contained: восемь заповедей, тринадцать грехов с шорткодами, DoD-таблица, чек-лист ревьюера, KPI масштабирования.
+**External readers.** The bible core (§§1–10) is self-contained: eight commandments, thirteen sins with shortcodes, a DoD table, a reviewer checklist, and scaling KPIs.
 
-**Контрибьюторы (правка библии или шаблона).**
+**Contributors (editing the bible or template).**
 
-- При правке любого из файлов проверяйте остальные на согласованность — маппинг разделов описан в `CLAUDE.md` (project instructions).
-- Принципы редактирования: краткость важнее полноты, императив вместо описания, конкретика вместо идеологии. Подробнее — `CLAUDE.md`.
-- Источники цифр в §1 и §4½ — в Appendix D библии. Менять цифры — только при появлении новой версии исследования и со ссылкой в коммите.
-- Коммиты — Conventional Commits (`feat`, `fix`, `chore`, `docs`).
+- When editing one file, check the other for semantic consistency — the cross-file mapping is documented in `CLAUDE.md` (project instructions).
+- Editing principles: brevity over completeness, imperative over description, concrete over ideological. See `CLAUDE.md` for details.
+- Sources for figures in §1 and §4½ live in Appendix D of the bible. Change figures only when a newer version of the research appears, and update the link in the same commit.
+- Commits follow Conventional Commits (`feat`, `fix`, `chore`, `docs`).
 
 ## Owner
 
-Владелец политики AI-кода в вашей команде / организации. Общая часть baseline пересматривается раз в квартал.
+The owner of the AI-code policy in your team or organization. The shared baseline is reviewed quarterly.

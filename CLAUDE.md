@@ -2,55 +2,55 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Что это за репозиторий
+## What this repo is
 
-Это **документационный репо** — политика по работе с AI-ассистентами для команд любого размера: от соло-разработчика и OSS-мейнтейнера до крупной организации. Кода, тестов, сборки, линтеров здесь нет. Не предлагай команды `npm`, `pytest`, `make` и т.п. — их некуда применять.
+This is a **documentation-only repo** — a policy for working with AI assistants for teams of any size: from a solo developer or OSS maintainer to a large organization. There is no code, no tests, no build, no linters. Do not suggest `npm`, `pytest`, `make`, or similar commands — there is nothing here to apply them to.
 
-Содержит два файла на русском языке:
+It holds two files:
 
-- **`vibe-engineering-bible.md`** — каноническая «библия». Ядро (§§1–10): два завета (Свободы для T0, Дисциплины для T1+), восемь заповедей, тринадцать грехов (§4½ — нормированный шорткодный язык отказа в мердже), DoD-таблица по T0–T3, spec-driven workflow, чек-лист ревьюера AI-кода, принципы baseline-шаблона, KPI масштабирования, глоссарий. Источники — Appendix D.
-- **`templates/CLAUDE.md.template.md`** — baseline-шаблон для AI-агентов в продуктовом репо. Применим в команде любого размера. Команды копируют его в свой репо как `CLAUDE.md` или `AGENTS.md` и дополняют только разделом 8.
+- **`vibe-engineering-bible.md`** — the canonical "bible". Core (§§1–10): two covenants (Freedom for T0, Discipline for T1+), eight commandments, thirteen sins (§4½ — a normalized shortcode vocabulary for merge rejections), a DoD table across T0–T3, spec-driven workflow, an AI-code reviewer checklist, baseline-template principles, scaling KPIs, glossary. Sources are in Appendix D.
+- **`templates/CLAUDE.md.template.md`** — baseline template for AI agents in a product repo. Applies to a team of any size. Teams copy it into their repo as `CLAUDE.md` or `AGENTS.md` and extend only section 8.
 
-Шаблон — единственный источник истины для baseline. Библия в §8 описывает принципы; тело шаблона живёт только в `templates/CLAUDE.md.template.md`.
+The template is the single source of truth for the baseline. §8 of the bible describes the principles; the template body lives only in `templates/CLAUDE.md.template.md`.
 
-## Семантическая связь файлов
+## Cross-file semantics
 
-- **Библия** держит общую модель: заповеди, грехи, DoD, KPI, spec-driven, чек-лист ревьюера.
-- **Шаблон** держит конкретные инструкции для AI-агентов в продуктовых репо. Команды копируют его как `CLAUDE.md` или `AGENTS.md`, дополняют только разделом 8 (репо-специфика); разделы 1–7 не редактируют.
-- При правке библии или шаблона проверяй второй файл на согласованность по смыслу. Маппинг не 1:1:
-  - **Заповеди §4 библии → §4 шаблона:** V/VI → §4.1–4.2 (безопасность, зависимости); VII → §4.3–4.4 (размер, тесты); VIII → §4.6 (документация).
-  - **Заповедь IV (один стек, paved road) → §2 шаблона** («Стек и команды»). Универсальный шаблон содержит плейсхолдер `{{...}}` — команда заполняет под свой стек.
-  - **DoD-таблица §5 библии → §6 шаблона** («Definition of Done для этой зоны»). В §6 шаблона предзаполнены три варианта (T1/T2/T3); команда удаляет два неприменимых.
-  - **Spec-driven §6 библии → §5 шаблона** (блок «Для T2+ изменений…») **и §7 библии п.8** (чек-лист ревьюера). Любая правка артефактов `openspec/changes/<x>/{proposal,specs,design,tasks}.md` должна синхронно отразиться во всех трёх местах.
-  - **Заветы §2–§3 библии** не имеют прямого аналога в шаблоне: T0 в шаблоне не описывается (шаблон ставится в T1+ репо).
-  - **Грехи §4½ библии** — нормированный словарь шорткодов отказа в мердже. В шаблоне прямого аналога нет (шаблон описывает правила, грехи — язык их нарушения). При добавлении/удалении греха — синхронизуй перекрёстные ссылки `*Грехи здесь:*` в соответствующей заповеди §4 и записи в глоссарии §10. Каждая строка таблицы §4½ обязана иметь действующий «корень» в §4/§5/§7 — грех без корня писать нельзя.
-  - **Источники цифр §1 и §4½ → Appendix D библии**. Любое утверждение с цифрой или CVE должно иметь ссылку в Appendix D. Менять цифры — только при появлении новой версии исследования и с обновлением ссылки.
+- **The bible** holds the shared model: commandments, sins, DoD, KPIs, spec-driven workflow, reviewer checklist.
+- **The template** holds concrete instructions for AI agents in product repos. Teams copy it as `CLAUDE.md` or `AGENTS.md`, extend section 8 (repo-specific) only; sections 1–7 are not edited.
+- When editing the bible or the template, check the other file for semantic consistency. The mapping is not 1:1:
+  - **Commandments §4 of the bible → §4 of the template:** V/VI → §4.1–4.2 (security, dependencies); VII → §4.3–4.4 (size, tests); VIII → §4.6 (documentation).
+  - **Commandment IV (one stack, paved road) → §2 of the template** ("Stack and commands"). The template holds `{{...}}` placeholders — the team fills them in for their stack.
+  - **DoD table §5 of the bible → §6 of the template** ("Definition of Done for this tier"). §6 of the template pre-fills three variants (T1/T2/T3); the team deletes the two that do not apply.
+  - **Spec-driven §6 of the bible → §5 of the template** (the "For T2+ changes…" block) **and §7 of the bible item 8** (reviewer checklist). Any change to the `openspec/changes/<x>/{proposal,specs,design,tasks}.md` artifacts must be reflected in all three places.
+  - **Covenants §2–§3 of the bible** have no direct counterpart in the template: T0 is not described in the template (the template is installed in T1+ repos).
+  - **Sins §4½ of the bible** are a normalized shortcode vocabulary for merge rejections. There is no direct counterpart in the template (the template describes rules; sins are the language of their violation). When adding/removing a sin, sync the *Sins here:* cross-references in the corresponding §4 commandment and the §10 glossary entries. Every row of §4½ must have a live "root" in §4/§5/§7 — a sin without a root cannot be written.
+  - **Sources for figures in §1 and §4½ → Appendix D of the bible.** Any claim with a figure or a CVE must have a link in Appendix D. Change figures only when a newer version of the research appears, and update the link in the same commit.
 
-## Принципы при редактировании этих файлов
+## Editing principles for these files
 
-Документ сам себя описывает — соблюдай его правила, когда вносишь правки:
+The document describes itself — follow its rules when making edits:
 
-- **Краткость важнее полноты.** Цель корневого `CLAUDE.md` в продуктовом репо — ≤2000 токенов. Если строку можно убрать без потери смысла — убери.
-- **Императив, а не описание.** «Используй pytest» — да. «Этот проект исторически использует pytest» — нет.
-- **Конкретика, а не идеология.** Правила должны быть проверяемыми.
-- Библия структурирована по разделам с номерами (1–10) плюс §4½ «Грехи» между Заповедями (§4) и DoD (§5), плюс Appendix D после §10. Дробный номер §4½ — намеренный, чтобы не ломать якорные ссылки на §5–§10. При вставке нового материала сохраняй эту схему: новые разделы — только как 4½/4¾, внутри существующих или как новый Appendix.
-- Пиши и отвечай **по-русски** — все файлы и весь дискурс на русском.
-- Коммиты — Conventional Commits (`feat`, `fix`, `chore`, `docs`, ...).
+- **Brevity over completeness.** The target for the root `CLAUDE.md` in a product repo is ≤2000 tokens. If a line can be removed without losing meaning — remove it.
+- **Imperative, not description.** "Use pytest" — yes. "This project historically uses pytest" — no.
+- **Concrete, not ideological.** Rules must be verifiable.
+- The bible is structured into numbered sections (1–10) plus §4½ "Sins" between Commandments (§4) and DoD (§5), plus Appendix D after §10. The fractional §4½ is intentional — it preserves anchor stability for §5–§10. When inserting new material, preserve this scheme: new sections only as 4½/4¾, inside existing ones, or as a new Appendix.
+- Write and respond in **English** — all files and all discourse are in English.
+- Commits follow Conventional Commits (`feat`, `fix`, `chore`, `docs`, …).
 
-## Что НЕ делать
+## What NOT to do
 
-- Не превращай эти документы в README с историей проекта или маркетингом.
-- Не возвращай дубликат шаблона в библию: §8 библии содержит только принципы и ссылку на шаблон; тело шаблона живёт в `templates/CLAUDE.md.template.md`.
-- Не добавляй в шаблон репо-специфику — для неё в шаблоне есть раздел 8 (его заполняет команда-владелец сервисного репо, не этот репо).
-- Не вставляй ссылки/цитаты, которых нет в Appendix D, без явного запроса пользователя — Appendix D намеренно опирается на проверенные публикации (METR, USENIX Spracklen, GitClear, Veracode, Stanford Perry, CodeRabbit, Apiiro, Mollick/BCG, CVE-перечень MCP, Anthropic auto-mode и т.п.).
-- Не редактируй цифры в §1 и §4½ «на глаз». Проценты, выборки, годы, CVE-номера, CVSS пиннятся к конкретным публикациям из Appendix D. Менять — только при появлении новой версии исследования и с обновлением ссылки в Appendix D в том же коммите.
+- Do not turn these documents into a README with project history or marketing.
+- Do not return a duplicate of the template into the bible: §8 of the bible holds only principles and a link to the template; the template body lives in `templates/CLAUDE.md.template.md`.
+- Do not add repo-specific content to the template — section 8 of the template is for that (filled in by the team that owns the service repo, not this repo).
+- Do not insert links or citations that are not in Appendix D without an explicit user request — Appendix D is deliberately anchored to vetted publications (METR, USENIX Spracklen, GitClear, Veracode, Stanford Perry, CodeRabbit, Apiiro, Mollick/BCG, MCP CVE list, Anthropic auto-mode, etc.).
+- Do not edit figures in §1 and §4½ by feel. Percentages, sample sizes, years, CVE IDs, CVSS scores are pinned to specific publications in Appendix D. Change them only when a newer version of the research appears, and update the Appendix D link in the same commit.
 
-## Терминология (минимум для навигации)
+## Terminology (minimum for navigation)
 
-- **Завет Свободы / Завет Дисциплины** — мета-структура библии. Свобода — §2 для T0; Дисциплина — §3+ для T1+. Граница проходит по личному эксперименту.
-- **T0 / T1 / T2 / T3** — четыре уровня кода (эксперимент / прототип / внутренний инструмент / продакшен). Каждому — строка в DoD §5 библии. Маппинг с lifecycle-метаданными (experiment/prototype/mvp/beta/production/deprecated) — в §3 библии.
-- **Lethal trifecta** — (приватные данные) + (недоверенный вход) + (внешний канал). Формулировка Simon Willison.
-- **Paved road / Golden Path** — поддерживаемый путь по умолчанию.
-- **Slopsquatting** — атака supply-chain через имена, которые часто галлюцинирует LLM.
-- **Spec-driven workflow / OpenSpec** — для T2+: артефакты `openspec/changes/<x>/{proposal.md, specs/, design.md, tasks.md}`, после релиза delta мёрджится в `openspec/specs/`. §6 библии. OpenSpec поддерживает 20+ AI-агентов.
-- **Грехи (mortal / venial)** — нормированный словарь из 13 шорткодов (§4½ библии). Смертные (7): `#sandbox-bypass`, `#trifecta`, `#promptable`, `#test-del`, `#merge-pray`, `#workslop`, `#hidden-ai`. Простительные (6): `#slot-machine`, `#self-auto`, `#confident-wrong`, `#tautological`, `#sycophancy`, `#zombie-t0`. Список нормированный: ревьюер не изобретает имена.
+- **Covenant of Freedom / Covenant of Discipline** — the bible's meta-structure. Freedom is §2 for T0; Discipline is §3+ for T1+. The boundary runs along the personal experiment.
+- **T0 / T1 / T2 / T3** — four tiers of code (experiment / prototype / internal tool / production). Each tier has a row in DoD §5 of the bible. Mapping to lifecycle metadata (experiment/prototype/mvp/beta/production/deprecated) is in §3 of the bible.
+- **Lethal trifecta** — (private data) + (untrusted input) + (external channel). Simon Willison's formulation.
+- **Paved road / Golden Path** — the supported default path.
+- **Slopsquatting** — a supply-chain attack via names that LLMs often hallucinate.
+- **Spec-driven workflow / OpenSpec** — for T2+: artifacts `openspec/changes/<x>/{proposal.md, specs/, design.md, tasks.md}`; after release, the delta is merged into `openspec/specs/`. §6 of the bible. OpenSpec supports 20+ AI agents.
+- **Sins (mortal / venial)** — a normalized vocabulary of 13 shortcodes (§4½ of the bible). Mortal (7): `#sandbox-bypass`, `#trifecta`, `#promptable`, `#test-del`, `#merge-pray`, `#workslop`, `#hidden-ai`. Venial (6): `#slot-machine`, `#self-auto`, `#confident-wrong`, `#tautological`, `#sycophancy`, `#zombie-t0`. The list is normalized: reviewers do not invent names.
