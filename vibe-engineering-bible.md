@@ -308,12 +308,12 @@ The figures in §1 and §4½ are pinned to publications — they can change only
 **Empirical work 2024–2026 (§1).**
 
 - METR. *Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity.* Becker, Rush, Barnes, Rein. July 10, 2025. 16 experienced developers, 246 tasks: with AI tools they finish 19% slower while subjectively believing they are 20% faster. https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/
-- GitClear. *Coding on Copilot: 2024 Lookback / AI Copilot Code Quality.* 211M lines, 2020–2024: block duplication grew 8×, churn 3.1% → 5.7%, the share of refactoring fell. https://www.gitclear.com/coding_on_copilot_data_shows_ai_assisted_developers_introduce_more_duplicates
+- GitClear. *Coding on Copilot: 2023 Data Suggests Downward Pressure on Code Quality (incl. 2024 projections).* 211M lines, 2020–2024: block duplication grew 8×, churn 3.1% → 5.7%, the share of refactoring fell. https://www.gitclear.com/coding_on_copilot_data_shows_ais_downward_pressure_on_code_quality
 - Spracklen, Wijewickrama, Sakib, Maiti, Viswanath, Jadliwala. *We Have a Package for You! A Comprehensive Analysis of Package Hallucinations by Code Generating LLMs.* USENIX Security 2025. 19.7% of LLM-recommended packages do not exist (5.2% commercial, 21.7% open-source); 43% of hallucinated names repeat in all 10 runs. https://www.usenix.org/conference/usenixsecurity25/presentation/spracklen
-- Veracode. *GenAI Code Security Report 2025.* 80 tasks × 100+ models: 45% of AI code fails on an OWASP-class vulnerability; Java — ~70%. https://www.veracode.com/state-of-software-security/genai-code-security-2025/
+- Veracode. *2025 GenAI Code Security Report.* 80 tasks × 100+ models: 45% of AI code fails on an OWASP-class vulnerability; Java — ~70%. https://www.veracode.com/resources/analyst-reports/2025-genai-code-security-report/
 - Perry, Srivastava, Hofmann, Boneh. *Do Users Write More Insecure Code with AI Assistants?* CCS 2023, November 2023. Stanford. Developers with AI write less secure code and are at the same time more confident in its security. https://dl.acm.org/doi/10.1145/3576915.3623157
 - CodeRabbit. *State of AI vs Human Code Generation Report.* December 2025. 470 GitHub PRs (320 AI-coauthored + 150 human-only): 1.7× more issues overall (10.83 vs 6.45 per PR), 1.4× critical, 1.7× major, security up to 2.74×, readability 3×, formatting 2.66×, error handling ~2×. https://www.coderabbit.ai/blog/state-of-ai-vs-human-code-generation-report
-- Apiiro. *Vibe Code: GenAI Code Security Findings 2025.* 4× delivery speed → 10× security risks; +322% privilege escalation paths, +153% architectural defects. https://apiiro.com/blog/genai-code-security-report-2025
+- Apiiro. *4× Velocity, 10× Vulnerabilities: AI Coding Assistants Are Shipping More Risks.* Fortune-50 enterprises, December 2024 – June 2025: 4× delivery speed → 10× security risks; +322% privilege escalation paths, +153% architectural defects. https://apiiro.com/blog/4x-velocity-10x-vulnerabilities-ai-coding-assistants-are-shipping-more-risks/
 
 **Cases and studies from §4 / §4½.**
 
@@ -325,7 +325,7 @@ The figures in §1 and §4½ are pinned to publications — they can change only
 - CVE-2025-59944 (Cursor IDE, case-sensitivity bypass on Windows/macOS — bypass of `.cursor/mcp.json` protection; patched in Cursor 1.7). https://www.lakera.ai/blog/cursor-vulnerability-cve-2025-59944
 - CVE-2025-6514 "mcp-remote" (RCE chain via a compromised MCP server; 437k+ package downloads). https://thehackernews.com/2025/07/critical-mcp-remote-vulnerability.html
 - CVE-2025-53109 / CVE-2025-53110 "EscapeRoute" (Anthropic Filesystem MCP Server). https://cymulate.com/blog/cve-2025-53109-53110-escaperoute-anthropic/
-- Samchon. *AI Deleted My Tests and Said 'All Tests Pass' — A Horror Story from Porting 'typia' from TypeScript to Go.* 2025. The precise case for sin `#test-del`. https://typia.io/blog/ai-deleted-my-tests-and-said-all-tests-pass/
+- Samchon. *AI Deleted My Tests and Said 'All Tests Pass' — A Horror Story from Porting 'typia' from TypeScript to Go.* 2025. The precise case for sin `#test-del`. https://dev.to/samchon/ai-deleted-my-tests-and-said-all-tests-pass-a-horror-story-from-porting-typia-from-typescript-2bmf
 - Yegge, Steve. *Six New Tips for Better Coding With Agents.* Medium, December 2025. (Relevant for the general philosophy of working with agents; not to be confused with the "#test-del" case from Samchon.) https://steve-yegge.medium.com/six-new-tips-for-better-coding-with-agents-d4e9c86e42a9
 - Hashimoto, Mitchell. Public Ghostty policy: AI PRs without author understanding are closed without reading. (Twitter/X posts; see also his own blog.)
 - Stanford Social Media Lab + BetterUp Labs. *The Workslop Report.* 2025. ~$9M/year per 10K employees; 54% of recipients — less creative, 42% — less trustworthy. Quoted in HBR.
@@ -339,9 +339,8 @@ The figures in §1 and §4½ are pinned to publications — they can change only
 - Karpathy. Vibe coding: https://twitter.com/karpathy/status/1886192184808149383 (February 2025).
 - Willison, Simon. Vibe engineering: https://simonwillison.net/2025/Oct/7/vibe-engineering/
 - Osmani. *The 70% problem.* https://addyo.substack.com/p/the-70-problem-hard-truths-about
-- Spotify Engineering. *Golden Path templates.* https://engineering.atspotify.com/2020/08/how-we-use-golden-paths-to-solve-fulfillment-issues/
+- Spotify Engineering. *How We Use Golden Paths to Solve Fragmentation in Our Software Ecosystem.* August 2020. https://engineering.atspotify.com/2020/08/how-we-use-golden-paths-to-solve-fragmentation-in-our-software-ecosystem
 - Netflix paved road: https://netflixtechblog.com/full-cycle-developers-at-netflix-a08c31f83249
-- Charity Majors. *Engineering management is dying.* https://charity.wtf/2024/03/15/the-engineer-manager-pendulum/
 
 ---
 
