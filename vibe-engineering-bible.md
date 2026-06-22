@@ -9,7 +9,7 @@ This bible holds two covenants:
 
 The document is the filter between them. The transition from the first to the second happens through explicit gates (§5 DoD), not by drift.
 
-The document is structured so that the universal core (§§1–10) applies equally to a solo developer, a five-person team, and a large organization. Sources for figures and cases are in Appendix D.
+The document is structured so that the universal core (§§1–10) applies equally to a solo developer, a five-person team, and a large organization. Sources for figures and cases are in Appendix D. The mechanism by which the standard evolves (how the bible grows bottom-up without diluting the core) is in Appendix E.
 
 **On tone.** Religious vocabulary ("covenants", "commandments", "sins") is mnemonic, not ideological. If it grates in your team — translate it into a secular register (norm / antipattern / prohibition); the meaning does not change.
 
@@ -132,6 +132,8 @@ The shortcode is used as `#shortcode` in a PR comment or as a label — it is a 
 | 13 | `#zombie-t0` | T0/T1 lives past the sunset date without migration to the next tier or deletion | `lambda-monitoring` written as T0 "for the evening" in August 2025; today a Grafana dashboard of three teams depends on it, owner unknown | §2, §4 II, DoD #4 |
 
 **The AI-review rule.** AI may **supplement** human review (focus, context, rule checking), but not replace it. Every PR in T2+ requires a human signature.
+
+**The list is closed.** The thirteen shortcodes are a normalized vocabulary; a reviewer does not invent names. The list grows legitimately only through the Appendix E gate: a field pattern → staging of candidates in `patterns.md` → a reasoned ADR. The count "thirteen" is a snapshot of today; it changes only on promotion.
 
 ## 5. Definition of Done by tier
 
@@ -344,6 +346,39 @@ The figures in §1 and §4½ are pinned to publications — they can change only
 
 ---
 
-This document is alive. It evolves together with the stack, the tools, and the understanding of AI. The core — eight commandments and thirteen sins — does not move. Not to forbid vibe coding, but so that vibe coding remains a way to move fast into the unknown. When the unknown becomes a product — the mode switches. Your name is in git blame.
+## Appendix E. Standard evolution
+
+This section is universal — it applies to anyone who uses the bible. It answers the question "how does the bible grow legitimately" without diluting the core.
+
+**Invariant.** The core — §4 (eight commandments), §4½ (sins), §5 (DoD) — is **closed and moves only through this section's gate**: rarely, via a reasoned ADR, updating every cross-reference. This sharpens the coda's "the core does not move": it moves only this way, not by ad-hoc edits on the fly. The catalog grows freely; the core does not.
+
+**Two upstream channels (field → bible).**
+
+- **Patterns** — `patterns.md`: an advisory catalog of field observations (what systematically breaks, or reliably works, when working with agents) plus staging for sin candidates. The growing, visible surface of the standard.
+- **Registry** — `registry.md`: a named, opt-in list of adopters. Deliberately incomplete (registration is public; confidential repos do not register — and that is normal).
+
+The process for both channels and the record schemas are in `CONTRIBUTING.md`.
+
+**Pattern pipeline.**
+
+```
+Local → Submitted → Accepted (patterns.md, advisory)
+                       │  ≥3 INDEPENDENT confirmations + mapping to a gap in the core
+                       ▼
+                    Candidate (staging) → reasoned ADR by the bible owner
+                       │  approved, ≤ once per quarter
+                       ▼
+                    Promoted (→ §4 / §4½ / §5)   or Rejected / Deprecated
+```
+
+- **Local** is already described: a repo-specific pattern lives in §8 of the adopter's `CLAUDE.md` (the "3+ repetitions" rule). Only the generalizable rises here.
+- **Promotion threshold — ≥3 independent confirmations** from different adopters (the number echoes §4½, but the metric differs: there it is repetitions by one author per quarter).
+- **Cadence** of core edits — no more than once a quarter (in sync with the quarterly bible review).
+
+**Contribution is opt-in and human-confirmed.** Submitting a pattern and registering are voluntary; the PR to the upstream repo is opened and confirmed by a human — the agent only prepares the draft. An auto-PR by an agent is forbidden: a PR to someone else's repo is an outward action, and under Commandment VI an agent does not perform it autonomously. This makes a registry PR a working example of the bible's own discipline, not an exception to it.
+
+---
+
+This document is alive. It evolves together with the stack, the tools, and the understanding of AI — bottom-up, through the Appendix E channels (`patterns.md`, `registry.md`). The core — eight commandments and thirteen sins — moves rarely and only through the Appendix E gate (a reasoned ADR), not by ad-hoc edits on the fly. Not to forbid vibe coding, but so that vibe coding remains a way to move fast into the unknown. When the unknown becomes a product — the mode switches. Your name is in git blame.
 
 **You commit it, you own it.**

@@ -10,6 +10,7 @@ or 5000 people. This is a documentation-only repo: no code, tests, or build here
 
 - **[`vibe-engineering-bible.md`](./vibe-engineering-bible.md)** — the canonical "bible". Structured as two covenants: the **Covenant of Freedom** (T0, vibe coding) sets minimal rules for personal experiments; the **Covenant of Discipline** (T1+, vibe engineering) covers eight commandments, thirteen sins (§4½, a normalized shortcode vocabulary for merge rejections), DoD by tier, spec-driven workflow, an AI-code reviewer checklist, the baseline template, scaling KPIs, and a glossary. Sources for figures and cases are in Appendix D.
 - **[`templates/CLAUDE.md.template.md`](./templates/CLAUDE.md.template.md)** — baseline template for AI agents in a product repo. Applies to a team of any size.
+- **[`patterns.md`](./patterns.md)** · **[`registry.md`](./registry.md)** · **[`CONTRIBUTING.md`](./CONTRIBUTING.md)** — the **standard-evolution** mechanism (Appendix E of the bible): a growing advisory catalog of field patterns, a named opt-in list of adopters, and the upstream contribution process (field → bible). The core grows only through a governed gate; contribution is opt-in and human-confirmed.
 
 ## How to use
 
@@ -23,6 +24,7 @@ or 5000 people. This is a documentation-only repo: no code, tests, or build here
 
 **Contributors (editing the bible or template).**
 
+- **Found a generalizable pattern or want to be in the registry?** Don't edit the core directly — there is an upstream path (opt-in, a human confirms the PR): see [`CONTRIBUTING.md`](./CONTRIBUTING.md). Field patterns go in [`patterns.md`](./patterns.md), adopters in [`registry.md`](./registry.md).
 - When editing one file, check the other for semantic consistency — the cross-file mapping is documented in `CLAUDE.md` (project instructions).
 - Editing principles: brevity over completeness, imperative over description, concrete over ideological. See `CLAUDE.md` for details.
 - Sources for figures in §1 and §4½ live in Appendix D of the bible. Change figures only when a newer version of the research appears, and update the link in the same commit.

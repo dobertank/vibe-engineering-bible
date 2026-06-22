@@ -6,10 +6,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a **documentation-only repo** — a policy for working with AI assistants for teams of any size: from a solo developer or OSS maintainer to a large organization. There is no code, no tests, no build, no linters. Do not suggest `npm`, `pytest`, `make`, or similar commands — there is nothing here to apply them to.
 
-It holds two files:
+It holds five files:
 
-- **`vibe-engineering-bible.md`** — the canonical "bible". Core (§§1–10): two covenants (Freedom for T0, Discipline for T1+), eight commandments, thirteen sins (§4½ — a normalized shortcode vocabulary for merge rejections), a DoD table across T0–T3, spec-driven workflow, an AI-code reviewer checklist, baseline-template principles, scaling KPIs, glossary. Sources are in Appendix D.
+- **`vibe-engineering-bible.md`** — the canonical "bible". Core (§§1–10): two covenants (Freedom for T0, Discipline for T1+), eight commandments, thirteen sins (§4½ — a normalized shortcode vocabulary for merge rejections), a DoD table across T0–T3, spec-driven workflow, an AI-code reviewer checklist, baseline-template principles, scaling KPIs, glossary. Sources are in Appendix D. The standard-evolution mechanism — Appendix E.
 - **`templates/CLAUDE.md.template.md`** — baseline template for AI agents in a product repo. Applies to a team of any size. Teams copy it into their repo as `CLAUDE.md` or `AGENTS.md` and extend only section 8.
+- **`patterns.md`** — an advisory catalog of field patterns + staging for sin candidates. A growing surface of self-evolution (Appendix E of the bible). Not canon: promotion into the core only through the gate.
+- **`registry.md`** — a named opt-in list of bible adopters. Public and deliberately incomplete (confidential repos do not register — that is normal).
+- **`CONTRIBUTING.md`** — the process for both upstream channels (patterns, registry) + the governance gate. Contribution is always opt-in + human-confirmed.
 
 The template is the single source of truth for the baseline. §8 of the bible describes the principles; the template body lives only in `templates/CLAUDE.md.template.md`.
 
@@ -23,8 +26,9 @@ The template is the single source of truth for the baseline. §8 of the bible de
   - **DoD table §5 of the bible → §6 of the template** ("Definition of Done for this tier"). §6 of the template pre-fills three variants (T1/T2/T3); the team deletes the two that do not apply.
   - **Spec-driven §6 of the bible → §5 of the template** (the "For T2+ changes…" block) **and §7 of the bible item 8** (reviewer checklist). Any change to the `openspec/changes/<x>/{proposal,specs,design,tasks}.md` artifacts must be reflected in all three places.
   - **Covenants §2–§3 of the bible** have no direct counterpart in the template: T0 is not described in the template (the template is installed in T1+ repos).
-  - **Sins §4½ of the bible** are a normalized shortcode vocabulary for merge rejections. There is no direct counterpart in the template (the template describes rules; sins are the language of their violation). When adding/removing a sin, sync the *Sins here:* cross-references in the corresponding §4 commandment and the §10 glossary entries. Every row of §4½ must have a live "root" in §4/§5/§7 — a sin without a root cannot be written.
+  - **Sins §4½ of the bible** are a normalized shortcode vocabulary for merge rejections. There is no direct counterpart in the template (the template describes rules; sins are the language of their violation). When adding/removing a sin, sync the *Sins here:* cross-references in the corresponding §4 commandment and the §10 glossary entries. Every row of §4½ must have a live "root" in §4/§5/§7 — a sin without a root cannot be written. The §4½ list is closed; it legitimately grows only through the Appendix E gate (staging in `patterns.md` → reasoned ADR). When promoting a new sin, also sync the "thirteen" count everywhere (intro, §3, README, the project `CLAUDE.md`, glossary).
   - **Sources for figures in §1 and §4½ → Appendix D of the bible.** Any claim with a figure or a CVE must have a link in Appendix D. Change figures only when a newer version of the research appears, and update the link in the same commit.
+  - **Appendix E of the bible (standard evolution) → `patterns.md` / `registry.md` / `CONTRIBUTING.md`.** The core (§4/§4½/§5) is closed; it grows only through the Appendix E gate. `patterns.md` is an advisory catalog; promotion into the core is by reasoned ADR, ≤ once per quarter, with a threshold of ≥3 independent confirmations and an update of all cross-references. The "Contributing upstream" hook in the template (after §7) points to these files. When you edit any of the three, check Appendix E and the template hook for consistency, and vice versa. Contribution is always opt-in + human-confirmed (Commandment VI); an auto-PR by an agent is forbidden.
 
 ## Editing principles for these files
 
@@ -33,7 +37,7 @@ The document describes itself — follow its rules when making edits:
 - **Brevity over completeness.** The target for the root `CLAUDE.md` in a product repo is ≤2000 tokens. If a line can be removed without losing meaning — remove it.
 - **Imperative, not description.** "Use pytest" — yes. "This project historically uses pytest" — no.
 - **Concrete, not ideological.** Rules must be verifiable.
-- The bible is structured into numbered sections (1–10) plus §4½ "Sins" between Commandments (§4) and DoD (§5), plus Appendix D after §10. The fractional §4½ is intentional — it preserves anchor stability for §5–§10. When inserting new material, preserve this scheme: new sections only as 4½/4¾, inside existing ones, or as a new Appendix.
+- The bible is structured into numbered sections (1–10) plus §4½ "Sins" between Commandments (§4) and DoD (§5), plus Appendix D and E after §10. The fractional §4½ is intentional — it preserves anchor stability for §5–§10. When inserting new material, preserve this scheme: new sections only as 4½/4¾, inside existing ones, or as a new Appendix.
 - Write and respond in **English** — all files and all discourse are in English.
 - Commits follow Conventional Commits (`feat`, `fix`, `chore`, `docs`, …).
 
@@ -44,6 +48,9 @@ The document describes itself — follow its rules when making edits:
 - Do not add repo-specific content to the template — section 8 of the template is for that (filled in by the team that owns the service repo, not this repo).
 - Do not insert links or citations that are not in Appendix D without an explicit user request — Appendix D is deliberately anchored to vetted publications (METR, USENIX Spracklen, GitClear, Veracode, Stanford Perry, CodeRabbit, Apiiro, Mollick/BCG, MCP CVE list, Anthropic auto-mode, etc.).
 - Do not edit figures in §1 and §4½ by feel. Percentages, sample sizes, years, CVE IDs, CVSS scores are pinned to specific publications in Appendix D. Change them only when a newer version of the research appears, and update the Appendix D link in the same commit.
+- Do not let `patterns.md` entries into the core (§4/§4½/§5) bypassing the Appendix E gate. The catalog is advisory; promotion is only by reasoned ADR with a threshold of ≥3 independent confirmations, ≤ once per quarter.
+- Do not promise anonymity in `registry.md`: a self-registration PR reveals the author (GitHub handle, fork, often a corporate email in the commit). An anonymous/aggregate tier is only via a non-PR channel (`CONTRIBUTING.md` §4), and it is not built in v1.
+- Do not hardcode an agent auto-PR into the template or the mechanisms: upstream contribution is opt-in + human-confirmed (Commandment VI). The agent prepares a draft, a human opens the PR.
 
 ## Terminology (minimum for navigation)
 
@@ -54,3 +61,4 @@ The document describes itself — follow its rules when making edits:
 - **Slopsquatting** — a supply-chain attack via names that LLMs often hallucinate.
 - **Spec-driven workflow / OpenSpec** — for T2+: artifacts `openspec/changes/<x>/{proposal.md, specs/, design.md, tasks.md}`; after release, the delta is merged into `openspec/specs/`. §6 of the bible. OpenSpec supports 20+ AI agents.
 - **Sins (mortal / venial)** — a normalized vocabulary of 13 shortcodes (§4½ of the bible). Mortal (7): `#sandbox-bypass`, `#trifecta`, `#promptable`, `#test-del`, `#merge-pray`, `#workslop`, `#hidden-ai`. Venial (6): `#slot-machine`, `#self-auto`, `#confident-wrong`, `#tautological`, `#sycophancy`, `#zombie-t0`. The list is normalized: reviewers do not invent names.
+- **Standard evolution (Appendix E)** — upstream field→bible channels: `patterns.md` (advisory catalog of field patterns + staging for sin candidates), `registry.md` (named opt-in list of adopters), `CONTRIBUTING.md` (process + gate). The core grows only through the gate: staging → reasoned ADR, threshold ≥3 independent confirmations, ≤ once per quarter. Contribution is opt-in + human-confirmed (Commandment VI); an auto-PR by an agent is forbidden.

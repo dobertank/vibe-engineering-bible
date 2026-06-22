@@ -180,6 +180,15 @@ guarantees through CI/CD, a release checklist in the repository, and a runbook.
 - AI tools, policies → {{policy owner or link to the Bible}}
 - Platform (CI/CD, infra) → {{who owns the platform}}
 
+**Contributing upstream (optional).** If a pattern from working with the agent
+GENERALIZES beyond this repo (not specific to your domain) — do not edit the bible
+core directly, there is an upstream path:
+- Prepare the pattern entry; **a human opens and confirms the PR to the upstream
+  `patterns.md`** (the agent only prepares the draft — it is an outward action,
+  Commandment VI).
+- Optionally register this repo in the upstream `registry.md` (same procedure).
+Schemas and process — the bible's `CONTRIBUTING.md`: {{link to the upstream bible repo}}.
+
 ---
 
 ## 8. Repo-specific (THE TEAM edits this section)
