@@ -1,6 +1,6 @@
-# Локальные артефакты планирования (skill superpowers): спеки и планы
-# конкретных правок. Полезны в текущем чате, но не коммитятся в репо.
+# Local planning artifacts (superpowers skill): specs and plans for
+# specific edits. Useful in the current chat, but not committed to the repo.
 docs/superpowers/
 
-# Локальные настройки Claude Code (per-user)
+# Local Claude Code settings (per-user)
 .claude/

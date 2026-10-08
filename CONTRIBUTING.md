@@ -1,8 +1,9 @@
 # How to contribute
 
-The "Vibe Coding Bible" is a living standard with two upstream feedback channels
-(field → bible): **patterns** and the **registry**. The full framing is Appendix E
-of the bible.
+The "Vibe Engineering Bible" is a living standard with two upstream feedback channels
+(field → bible): **patterns** and the **adoption registry** (`registry.md`). The full
+framing is Appendix E of the bible; applying it to projects (init / audit / review /
+proposal) — Appendix F, [`usage.md`](./usage.md), and [`playbooks/`](./playbooks/).
 
 The principle running through both channels: **the agent prepares, a human
 confirms.** A PR to this (upstream) repo is an outward-directed action; under
@@ -28,6 +29,10 @@ Procedure:
 2. The agent prepares a draft entry and PR; **you review and open the PR yourself.**
 3. The maintainer deduplicates against the core and the catalog and merges it as
    `accepted` (advisory) — this is **not** canon, but a visible part of the standard.
+   Until deduplication, the entry has the status `submitted`.
+
+The draft entry and the proposal are conveniently prepared with the
+[`playbooks/propose-bible-change.md`](./playbooks/propose-bible-change.md) skill.
 
 Preference goes to patterns with evidence (an incident, a repro); they rank higher
 in the promotion queue. Pure opinion stays advisory.
@@ -41,7 +46,7 @@ this gate. The lifecycle:
 Local → Submitted → Accepted (patterns.md, advisory)
                        │  ≥3 INDEPENDENT confirmations + mapping to a gap in the core
                        ▼
-                    Candidate (staging) → reasoned ADR by the bible owner
+                    Candidate (staging) → reasoned ADR by the owner group (docs/adr/)
                        │  approved, ≤ once per quarter
                        ▼
                     Promoted (→ §4 / §4½ / §5)   or Rejected / Deprecated
@@ -49,28 +54,38 @@ Local → Submitted → Accepted (patterns.md, advisory)
 
 - **Promotion threshold — ≥3 independent confirmations** from different adopters.
   (Echoes the number 3 from §4½, but it is a different metric: there it is
-  repetitions by one author per quarter; here it is independent adopters.)
+  repetitions in one team per quarter; here it is independent adopters.)
 - **Cadence** — promotion into the core no more than once a quarter (in sync with
-  the quarterly bible review).
+  the quarterly bible review). The same review **removes** what is outdated:
+  catalog entries that are already enforced by the environment or have lost
+  relevance move to `deprecated`.
+- **The reasoned ADR** lives in [`docs/adr/`](./docs/adr/): context, decision,
+  rationale with a link to the source, consequences. Example —
+  [`docs/adr/0001-bible-2.0.md`](./docs/adr/0001-bible-2.0.md).
 - **On promotion** a core edit drags ALL cross-references: for a new sin — the §4½
   table, the "Sins here" lines in the matching §4 commandment, the §10 glossary
   entry, and the "thirteen" count everywhere; for a DoD line — §5 + §6 of the
   template; for a figure/CVE source — Appendix D. The link map is in the project
-  `CLAUDE.md`.
+  [`CLAUDE.md`](./CLAUDE.md).
 
-**Who is the owner.** In a large organization this may be a dedicated AI-code
-group; in a small team the owner-developer or tech lead wears the hat. The gate
-works even with a single maintainer — what matters is not the size of the body,
-but that the core does not change by ad-hoc edits on the fly.
+**Who the owner group is.** A small group from the teams doing the adoption work,
+one owner per part; not a committee. In a small team the owner-developer or tech
+lead wears the hat (see the terminology in the project `CLAUDE.md`). The gate works
+even with a single maintainer — what matters is not the size of the body, but that
+the core does not change by ad-hoc edits on the fly.
 
 ## 3. Register in the registry
 
-Optional. Adds your repo/org to [`registry.md`](./registry.md) — the named, public
-list of adopters.
+Optional. Adds your project/org to [`registry.md`](./registry.md) — the adoption
+registry: in the public upstream it is a named opt-in list of adopters; in an
+organization's internal copy of the repo it is an index of projects where the bible
+is actually applied.
 
 The procedure is the same **the agent prepares, a human confirms**: the agent
-prepares the table row and a draft PR, you review and open the PR yourself. Only
-the **Adopter** and **Date** fields are required.
+prepares the table row per
+[`templates/project-registry-entry.md`](./templates/project-registry-entry.md) and a
+draft PR, you review and open the PR yourself. Only the **Project** and **Date**
+fields are required.
 
 Remember: registration is **public**. The PR is signed by your GitHub account,
 often with a corporate email in the commit. If disclosure is unacceptable — do not
@@ -100,9 +115,10 @@ fact or details of their use. For them:
 
 ## 6. Editing the bible files themselves
 
-If you edit the bible or the template directly (rather than submitting a pattern) —
-follow the principles in the project [`CLAUDE.md`](./CLAUDE.md): brevity over
-completeness, imperative over description, concrete over ideological; when editing
-any file, check the others for consistency (the link map is there too). Commits
-follow Conventional Commits (`feat`, `fix`, `chore`, `docs`, …). The figures in §1
-and §4½ are pinned to Appendix D — change them only with an updated link.
+If you edit the bible, the template, or the playbooks directly (rather than
+submitting a pattern) — follow the principles in the project
+[`CLAUDE.md`](./CLAUDE.md): brevity over completeness, imperative over description,
+concrete over ideological; when editing any file, check the others for consistency
+(the link map is there too). Commits follow Conventional Commits (`feat`, `fix`,
+`chore`, `docs`, …). The figures in §1 and §4½ are pinned to Appendix D — change
+them only with an updated link.
