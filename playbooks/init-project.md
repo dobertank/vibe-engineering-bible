@@ -39,10 +39,10 @@ The transition is triggered by an event, not by feel: shown outside your team; s
 4. Copy the baseline into the project as `CLAUDE.md` and/or `AGENTS.md`.
 5. Fill in the baseline placeholders §1–§3 — including §3.1 "What the environment enforces, and what this file says" — and section 8. Do not rewrite rules §4–§7. Keep the file short: only the non-obvious, target ≤~150 lines.
 6. For Production, create or update the `README`: what it is, how to run it, who the owner is, lifecycle.
-7. For Production, turn on deterministic checks in CI from day one: build and tests, secrets, slopsquatting check / internal package mirror, SAST high/critical, license scan, CODEOWNERS (including agent configuration), a detector of weakened checks; set up branch protection in the repository settings, out of the agent's reach. Probabilistic checks (AI review) — advisory only; the exception is a fail-closed gate on the agent's untrusted input, set up as a harness hook rather than in CI (§5 #41).
+7. For Production, turn on deterministic checks (class D, §5 of the bible) in CI from day one; set up branch protection in the repository settings, out of the agent's reach. Probabilistic checks (AI review) — advisory only; the exception is a fail-closed gate on the agent's untrusted input, set up as a harness hook rather than in CI (§5 #41).
 8. For Production, create `openspec/` or record the first spec before code; name the expected outcome in it.
-9. Prepare the `registry.md` entry using `templates/project-registry-entry.md`.
-10. Fill in `templates/init-result.md` and put the next actions into the nearest PR/issue.
+9. Prepare the `registry.md` row (fields — the legend under the registry table).
+10. Output the result in the format below and put the next actions into the nearest PR/issue.
 
 ## Definition of Ready
 
@@ -50,7 +50,34 @@ The project is ready for its first meaningful PR if:
 
 - There is an owner.
 - The level and the "customers" flag are recorded in the README or the registry; the transition event is named.
+- For a prototype the environment holds the three boundaries; lifetime ≤30 days.
 - For Production there is a `CLAUDE.md`/`AGENTS.md`, with §3.1 filled in.
 - For Production the deterministic checks are on in CI, or recorded as explicit debt with an owner and a deadline.
 - For Production there is no direct lethal trifecta: private data + untrusted input + external channel.
 - For Production the expected outcome is named.
+
+## Output
+
+```md
+# Init: <project>
+Date: <YYYY-MM-DD> · Owner: <name/team> · Expected lifetime: <duration> · Baseline: <CLAUDE.md / AGENTS.md / both / none>
+
+## Brief
+<What we are building, for whom, which data, constraints.> Expected outcome: <what will change and how we will confirm it; mandatory for Production>
+
+## Level
+<Prototype / Production> · customers: <yes / no>. Why: <reasons>. Transition event: <trigger>.
+Agent autonomy: <Prototype — on its own in an isolated environment / Production — into shared code only after human review / + customers — only proposals or actions with confirmation>
+
+## Created / updated
+README · CLAUDE.md/AGENTS.md · openspec/ · CI: deterministic checks, probabilistic (advisory) · CODEOWNERS on agent configuration · row in registry.md — <yes / no / path / n-a for each>
+
+## Definition of Ready
+| Item (list above) | pass / fail / n-a | Comment |
+|---|---|---|
+
+## Next Actions
+1. <first action>
+2. <second>
+3. <third>
+```

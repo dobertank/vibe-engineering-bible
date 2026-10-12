@@ -12,44 +12,24 @@ one, run a pre-PR review, and feed useful findings back into the bible.
 
 This is a documentation-only repo: no code, tests, or build here.
 
-**Version 2.0 · October 2026.** What changed and why — Appendix E of the bible and
-[`docs/adr/0001-bible-2.0.md`](./docs/adr/0001-bible-2.0.md).
+**Version 2.0 · October 2026** — the first version for adoption. Core changes after it go through a reasoned ADR (Appendix E of the bible).
 
 ## Contents
 
 - **[`vibe-engineering-bible.md`](./vibe-engineering-bible.md)** — the canonical "bible". Two covenants — two maturity levels: the **Covenant of Freedom** — Prototype, with three unbreakable boundaries; the **Covenant of Discipline** — Production, everything someone other than the author uses, with the "+ customers" overlay and an event-triggered transition. Inside — eight commandments, thirteen sins (§4½, a normalized shortcode vocabulary for merge rejections), DoD "Prototype / Production / + customers" with gate classes, the loop "spec → agent → verification → rollout → outcome", an AI-code reviewer checklist, context files and development-agent skills, metrics and ownership, glossary. Sources for figures — Appendix D; standard evolution — Appendix E; applying the bible to projects — Appendix F.
-- **[`usage.md`](./usage.md)** — how to apply the repo to live projects: roles, four application modes, two classes of checks, playbooks as development-agent skills, artifacts.
-- **[`playbooks/`](./playbooks/)** — operational scenarios: init of a new project, audit of an existing one, pre-PR/PR review, a proposal to change the bible. Each can be shipped as a `SKILL.md`.
-- **[`templates/CLAUDE.md.template.md`](./templates/CLAUDE.md.template.md)** — baseline template for AI agents in a product repo. Applies to a team of any size.
-- **[`templates/`](./templates/)** — forms for applying the bible: audit report, init result, registry entry, bible change proposal; starter files `intent.md` and `REVIEW.md` for a product repo.
-- **[`patterns.md`](./patterns.md)** · **[`registry.md`](./registry.md)** · **[`CONTRIBUTING.md`](./CONTRIBUTING.md)** · **[`docs/adr/`](./docs/adr/)** — the **standard-evolution** mechanism (Appendix E): an advisory catalog of field patterns and a queue of sin candidates, the adoption registry (opt-in), the upstream contribution process, reasoned ADRs on core changes. The core grows only through the gate; contribution is opt-in and human-confirmed.
+- **[`usage.md`](./usage.md)** — how to apply the repo to live projects: roles, four modes, the process, example agent requests, playbooks as skills.
+- **[`playbooks/`](./playbooks/)** — init of a new project, audit of an existing one, pre-PR/PR review, a proposal to change the bible. Each is an agent skill (`SKILL.md`) with its output format inside.
+- **[`templates/CLAUDE.md.template.md`](./templates/CLAUDE.md.template.md)** — baseline template for AI agents in a product repo; applies to a team of any size.
+- **[`templates/audit-report.md`](./templates/audit-report.md)** — the audit report format; **[`intent.md`](./templates/intent.md)** and **[`REVIEW.md`](./templates/REVIEW.md)** — starter files for a product repo: the intent (§6) and the AI review policy (§7).
+- **[`patterns.md`](./patterns.md)** · **[`registry.md`](./registry.md)** · **[`CONTRIBUTING.md`](./CONTRIBUTING.md)** · **[`docs/adr/`](./docs/adr/)** — **standard evolution** (Appendix E): an advisory catalog of field patterns and a queue of sin candidates, the adoption registry (opt-in), the upstream contribution process, reasoned ADRs on core changes.
+- **[`AGENTS.md`](./AGENTS.md)** — instructions for agents editing this repo: what to cross-check and what not to do (`CLAUDE.md` imports it).
 
 ## How to use
 
-**If you are applying it to a project.**
-
-1. Open [`usage.md`](./usage.md).
-2. Choose the mode:
-   - a new project — [`playbooks/init-project.md`](./playbooks/init-project.md);
-   - an existing project — [`playbooks/audit-project.md`](./playbooks/audit-project.md);
-   - a diff/PR — [`playbooks/review-pr.md`](./playbooks/review-pr.md);
-   - a new rule from practice — [`playbooks/propose-bible-change.md`](./playbooks/propose-bible-change.md).
-3. For Production, copy [`templates/CLAUDE.md.template.md`](./templates/CLAUDE.md.template.md) into the product repo as `CLAUDE.md` (Claude Code) and/or `AGENTS.md` (Codex, Cursor, and others that support `agents.md`).
-4. Fill in the placeholders in §1–§3 of the baseline — including §3.1 "what the environment enforces" — and section 8 ("Repo-specific"). Do not edit the rules in §4–§7 locally. Keep the file short: only the non-obvious, target ≤~150 lines; what is mandatory goes into agent settings, hooks, and CI.
-5. After the first real application, add the project to [`registry.md`](./registry.md).
-
-Cross-reference the Production DoD (and the "+ customers" column, if you have customers) against §5 of the bible.
-
-**External readers.** The bible core (§§1–10) is self-contained: two covenants (Prototype and Production) with the "+ customers" overlay, eight commandments, thirteen sins with shortcodes, a DoD table with gate classes, the loop, a reviewer checklist, metrics. Appendix D — sources; Appendix E — how the bible grows; Appendix F — how to apply it to projects.
-
-**Contributors (editing the bible, the template, playbooks).**
-
-- **Found a generalizable pattern or want to be in the registry?** Don't edit the core directly — there is an upstream path (opt-in, a human confirms the PR): see [`CONTRIBUTING.md`](./CONTRIBUTING.md). Field patterns go in [`patterns.md`](./patterns.md), applications in [`registry.md`](./registry.md).
-- Reflect process changes in `usage.md` / `playbooks/` first; carry into the bible core only stable norms — through the Appendix E gate and a reasoned ADR in `docs/adr/`.
-- When editing any file, check the others for semantic consistency — the cross-file mapping is documented in [`CLAUDE.md`](./CLAUDE.md) (project instructions).
-- Editing principles: brevity over completeness, imperative over description, concrete over ideological. See `CLAUDE.md` for details.
-- Sources for figures in §1 and §4½ live in Appendix D of the bible. Change figures only when a newer version of the research appears, and update the link in the same commit.
-- Commits follow Conventional Commits (`feat`, `fix`, `chore`, `docs`).
+1. Pick a playbook: a new project — [`init-project.md`](./playbooks/init-project.md), an existing one — [`audit-project.md`](./playbooks/audit-project.md), a diff/PR — [`review-pr.md`](./playbooks/review-pr.md), a new rule from practice — [`propose-bible-change.md`](./playbooks/propose-bible-change.md); order and roles — [`usage.md`](./usage.md).
+2. For Production, copy the baseline into the product repo as `CLAUDE.md` (Claude Code) and/or `AGENTS.md` (Codex, Cursor, and others that support `agents.md`).
+3. Fill in §1–§3 (including §3.1 "what the environment enforces") and section 8; do not edit the rules in §4–§7. Cross-check against DoD §5 of the bible.
+4. After the first real application, add the project to [`registry.md`](./registry.md); a pattern that generalizes goes to [`patterns.md`](./patterns.md) per [`CONTRIBUTING.md`](./CONTRIBUTING.md).
 
 ## Owner
 

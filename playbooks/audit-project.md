@@ -36,7 +36,7 @@ An audit is not a refactoring. First the report, then the owner's decision, then
    - `README` or equivalent: goal, how to run, owner, lifecycle.
    - `CLAUDE.md`/`AGENTS.md`: is there a baseline, are §3.1 and the repo-specific section filled in, is it bloated (target ≤~150 lines, no repo overviews).
    - **Environment vs. text:** which mandatory rules are enforced by managed settings, hooks, CI, and which live only in text.
-   - **Gates:** do deterministic checks (build and tests, secrets, mirror / slopsquatting check, SAST high/critical, license scan, CODEOWNERS, a detector of weakened checks) block? Is branch protection out of the agent's reach? Do probabilistic ones (AI review, LLM judge, mutation score) block only after calibration, and is the gate on untrusted input fail-closed (§5 #41)?
+   - **Gates:** do deterministic checks (class D, §5 of the bible) block? Is branch protection out of the agent's reach? Do probabilistic ones (class P) block only after calibration, and is the gate on untrusted input fail-closed (§5 #41)?
    - **Agent configuration:** skills, plugins, MCP servers, hooks — do they have owners (CODEOWNERS), review, version pinning; where were they installed from.
    - **The loop:** is there a spec sized to the task (`openspec/` in Production), an evidence bundle in PRs, is the expected outcome named and how is it confirmed.
    - Tests/specs: are there tests, ADRs, a threat model; are tests written from the spec, not from the code.

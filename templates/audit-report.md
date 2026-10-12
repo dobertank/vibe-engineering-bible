@@ -58,7 +58,7 @@ Severity and consequences (§4½ of the bible):
 ## Registry
 
 `registry.md` needs an update: <yes/no>
-Proposed row: <summary or link to template>
+Proposed row: <per the legend under the `registry.md` table>
 
 ## Next Actions
 

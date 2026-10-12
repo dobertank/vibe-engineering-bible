@@ -1,125 +1,37 @@
 # How to contribute
 
-The "Vibe Engineering Bible" is a living standard with two upstream feedback channels
-(field → bible): **patterns** and the **adoption registry** (`registry.md`). The full
-framing is Appendix E of the bible; applying it to projects (init / audit / review /
-proposal) — Appendix F, [`usage.md`](./usage.md), and [`playbooks/`](./playbooks/).
-
-The principle running through both channels: **the agent prepares, a human
-confirms.** A PR to this (upstream) repo is an outward-directed action; under
-Commandment VI of the bible and 12-factor agents (factor 7) an agent does not
-perform such an action autonomously. The agent may prepare a draft entry and PR
-text; a human opens and confirms the PR. An auto-PR by an agent is forbidden
-(otherwise the bible would be teaching agents exactly what it itself forbids, and
-would risk the `#workslop` sin).
+Two upstream channels — patterns and the adoption registry; the framing, the pattern lifecycle, and the gate into the core — Appendix E of the bible.
+The principle running through both: **the agent prepares, a human confirms.** A PR to the upstream repo is an outward action (Commandment VI): the agent
+prepares a draft entry and the PR text, a human opens and confirms the PR. An auto-PR by an agent is forbidden.
 
 ## 1. Submit a pattern
 
-If while working with an AI agent you found a pattern that **generalizes beyond
-your repo** (not specific to your domain) — its place is here, in
-[`patterns.md`](./patterns.md), not in a direct edit of the core.
+Repo-specific — into section 8 of your own `CLAUDE.md`/`AGENTS.md` (repeated to the agent 3+ times → a line). What generalizes beyond
+your domain — into [`patterns.md`](./patterns.md), not as an edit of the core.
 
-The boundary: repo-specific → §8 of your own `CLAUDE.md` (the "repeated to the
-agent 3+ times → a line in §8" rule). Generalizable → here.
+1. Phrase the entry per the [`patterns.md`](./patterns.md) schema; a root is required.
+2. The agent prepares a draft entry and PR — conveniently with the [`playbooks/propose-bible-change.md`](./playbooks/propose-bible-change.md) skill; **you review and open the PR yourself.**
+3. The maintainer deduplicates against the core and the catalog and merges it as `accepted` — advisory, not canon.
+   Patterns with evidence (an incident, a repro) rank higher in the promotion queue; pure opinion stays advisory.
 
-Procedure:
-1. Phrase the entry per the schema in [`patterns.md`](./patterns.md) ("Record
-   schema"). A **root** is required — which commandment / sin / DoD it maps to (or
-   "new area"). A pattern without a root is not accepted.
-2. The agent prepares a draft entry and PR; **you review and open the PR yourself.**
-3. The maintainer deduplicates against the core and the catalog and merges it as
-   `accepted` (advisory) — this is **not** canon, but a visible part of the standard.
-   Until deduplication, the entry has the status `submitted`.
+To let a product repo's agent know about this channel, the team can add a line to section 8 of its file:
+"A generalizable pattern is an entry in the bible upstream's `patterns.md`, not an edit of the core; a human opens the PR, the agent prepares the draft. Process — `CONTRIBUTING.md`: {{link to upstream}}".
 
-The draft entry and the proposal are conveniently prepared with the
-[`playbooks/propose-bible-change.md`](./playbooks/propose-bible-change.md) skill.
+## 2. Register in the registry
 
-Preference goes to patterns with evidence (an incident, a repro); they rank higher
-in the promotion queue. Pure opinion stays advisory.
+Optional, after the first real application. The agent prepares a row per the [`registry.md`](./registry.md) legend and a draft PR;
+you review and open the PR yourself. The required fields are in the legend.
 
-## 2. The governance gate: how a pattern reaches the core
+**Registering in the public repo is disclosure.** The PR is signed by your account, it is visible in the fork network, and the commit's author email often
+carries a corporate domain. So:
 
-The core (§4 commandments, §4½ sins, §5 DoD) is **closed** and moves only through
-this gate. The lifecycle:
+- **Not registering is normal.** The registry deliberately undercounts; absence from it ≠ non-use.
+- **An aggregate entry without disclosure** (a pseudonym like "fintech, ~200 engineers, Production + customers") — only through a private channel,
+  not a PR: a PR deanonymizes the author. In v1 the channel is not built — message the maintainer directly.
 
-```
-Local → Submitted → Accepted (patterns.md, advisory)
-                       │  ≥3 INDEPENDENT confirmations + mapping to a gap in the core
-                       ▼
-                    Candidate (staging) → reasoned ADR by the owner group (docs/adr/)
-                       │  approved, ≤ once per quarter
-                       ▼
-                    Promoted (→ §4 / §4½ / §5)   or Rejected / Deprecated
-```
+## 3. Editing the files themselves
 
-- **Promotion threshold — ≥3 independent confirmations** from different adopters.
-  (Echoes the number 3 from §4½, but it is a different metric: there it is
-  repetitions in one team per quarter; here it is independent adopters.)
-- **Cadence** — promotion into the core no more than once a quarter (in sync with
-  the quarterly bible review); the cadence switches on with the first record of a
-  live application in `registry.md` (Appendix E of the bible). The same review
-  **removes** what is outdated: catalog entries that are already enforced by the
-  environment or have lost relevance move to `deprecated`.
-- **The reasoned ADR** lives in [`docs/adr/`](./docs/adr/): context, decision,
-  rationale with a link to the source, consequences. Example —
-  [`docs/adr/0001-bible-2.0.md`](./docs/adr/0001-bible-2.0.md).
-- **On promotion** a core edit drags ALL cross-references: for a new sin — the §4½
-  table, the "Sins here" lines in the matching §4 commandment, the §10 glossary
-  entry, and the "thirteen" count everywhere; for a DoD line — §5 + §6 of the
-  template; for a figure/CVE source — Appendix D. The link map is in the project
-  [`CLAUDE.md`](./CLAUDE.md).
-
-**Who the owner group is.** A small group from the teams doing the adoption work,
-one owner per part; not a committee. In a small team the owner-developer or tech
-lead wears the hat (see the terminology in the project `CLAUDE.md`). The gate works
-even with a single maintainer — what matters is not the size of the body, but that
-the core does not change by ad-hoc edits on the fly.
-
-## 3. Register in the registry
-
-Optional. Adds your project/org to [`registry.md`](./registry.md) — the adoption
-registry: in the public upstream it is a named opt-in list of adopters; in an
-organization's internal copy of the repo it is an index of projects where the bible
-is actually applied.
-
-The procedure is the same **the agent prepares, a human confirms**: the agent
-prepares the table row per
-[`templates/project-registry-entry.md`](./templates/project-registry-entry.md) and a
-draft PR, you review and open the PR yourself. Only the **Project** and **Date**
-fields are required.
-
-Remember: registration is **public**. The PR is signed by your GitHub account,
-often with a corporate email in the commit. If disclosure is unacceptable — do not
-register (that is fine, see §4) or request an aggregate entry.
-
-## 4. Confidential adopters
-
-Internal / enterprise repos, by the spirit of the bible itself, do not disclose the
-fact or details of their use. For them:
-
-- **Not registering is normal.** The registry deliberately undercounts; absence
-  from it ≠ non-use.
-- **Need an aggregate entry without disclosure** (a pseudonym like "fintech, ~200
-  engineers, profile III, Production + customers") — that goes through a **private
-  channel, not a PR** (only a non-PR transport preserves anonymity; a PR
-  deanonymizes the author). In v1 the channel is not built yet — message the
-  maintainer directly, the door is open, we will add the infrastructure on demand.
-
-## 5. Why exactly this way (self-consistency)
-
-- A human-confirmed registry PR is a **working example** of Commandment VI of the
-  bible: an outward action passes through a human.
-- An advisory catalog + a gate into the core → the claim "the core does not move"
-  is sharpened to "moves only through Appendix E", which is stricter, not weaker.
-- The ≥3 threshold and the quarterly cadence reuse numbers that already exist in
-  the bible — no new magic constants.
-
-## 6. Editing the bible files themselves
-
-If you edit the bible, the template, or the playbooks directly (rather than
-submitting a pattern) — follow the principles in the project
-[`CLAUDE.md`](./CLAUDE.md): brevity over completeness, imperative over description,
-concrete over ideological; when editing any file, check the others for consistency
-(the link map is there too). Commits follow Conventional Commits (`feat`, `fix`,
-`chore`, `docs`, …). The figures in §1 and §4½ are pinned to Appendix D — change
-them only with an updated link.
+Editing the bible, the template, or the playbooks directly — follow [`AGENTS.md`](./AGENTS.md): the "you edit X → check Y" table
+and "what not to do". A core change (§4, §4½, §5) — only through the Appendix E gate and a reasoned ADR in [`docs/adr/`](./docs/adr/)
+(format — in [`playbooks/propose-bible-change.md`](./playbooks/propose-bible-change.md)). The gate works even with a single maintainer:
+what matters is not the size of the owner group, but that the core does not change by ad-hoc edits on the fly. Commits follow Conventional Commits.
