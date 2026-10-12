@@ -1,6 +1,6 @@
 ---
 name: bible-init-project
-description: Initialize a new project per the "Vibe Engineering Bible" — mode and risk tier, baseline CLAUDE.md/AGENTS.md, what the environment enforces, registry entry. Use when an idea turns into a new repo, folder, or prototype ("set up a project", "initialize per the bible", "init project").
+description: Initialize a new project per the "Vibe Engineering Bible" — level (Prototype / Production, "+ customers"), baseline CLAUDE.md/AGENTS.md, what the environment enforces, registry entry. Use when an idea turns into a new repo, folder, or prototype ("set up a project", "initialize per the bible", "init project").
 ---
 
 # Playbook: init a new project
@@ -9,9 +9,9 @@ description: Initialize a new project per the "Vibe Engineering Bible" — mode 
 
 ## Goal
 
-Turn an idea into a repo or folder where, from day one, the goal, owner, mode and risk tier, what the environment enforces, and the rules for AI agents are clear.
+Turn an idea into a repo or folder where, from day one, the goal, owner, level, what the environment enforces, and the rules for AI agents are clear.
 
-Init does not have to build a production-grade system. It has to prevent an experiment from quietly pretending to be T2/T3.
+Init does not have to build a production-grade system. It has to prevent a prototype from quietly becoming Production and bypassing the DoD.
 
 ## Inputs
 
@@ -23,26 +23,24 @@ Init does not have to build a production-grade system. It has to prevent an expe
 - Preferred stack or paved road.
 - Whether deploy, shared state, or external integrations are needed.
 
-## Deciding the mode and tier (§2–§3 of the bible)
+## Deciding the level (§2–§3 of the bible)
 
-- **Experiment (T0, Covenant of Freedom)** — no production data, no work secrets, no shared state, lifetime up to 30 days. The agent acts on its own in an isolated environment.
-- **Engineering mode (Covenant of Discipline)** — anything used by someone other than the author. Inside it, risk tiers:
-  - **T1** — a prototype others see. Needs README, owner, sunset date, baseline.
-  - **T2** — an internal tool others use. Needs tests, deterministic checks in CI, a basic threat model, a spec for non-trivial changes.
-  - **T3** — a product for customers or a public release. Needs the full DoD §5, the two-person rule, a release process, a runbook.
+- **Prototype (Covenant of Freedom)** — the author's personal experiment with no production or customer data, no work secrets, no shared state, lifetime up to 30 days. No rituals and no baseline; the agent acts on its own in an isolated environment.
+- **Production (Covenant of Discipline)** — anything used by someone other than the author: from a utility for the neighboring team to a customer-facing service. Needs README, owner, baseline, catalog entry, tests and deterministic checks in CI, human review, a basic threat model, a spec for non-trivial changes.
+- **"+ customers"** — an overlay on Production, not a third level: customers, customer data, or a public release. Adds a full threat model, mutation testing, a second senior+ reviewer, gradual rollout with rollback, a runbook, a kill-switch.
 
-The transition is triggered by an event, not by feel: shown outside your team; someone other than the author started using it; real data, secrets, or shared state became necessary; asked for it to be put on the roadmap. If in doubt between two tiers, pick the lower one for speed, but explicitly write down the event that moves it to the next.
+The transition is triggered by an event, not by feel: shown outside your team; someone other than the author started using it; real data, secrets, or shared state became necessary; asked for it to be put on the roadmap. Showing it inside your own team is not a transition. Pick Prototype only if all three boundaries hold, and explicitly write down the event that moves it to Production.
 
 ## Steps
 
 1. Write a short project brief: goal, expected outcome, users, data, expected lifetime, owner.
-2. Assign the mode and tier T0/T1/T2/T3 and explain why; write down the transition event.
-3. Take the baseline `templates/CLAUDE.md.template.md`. If you already have extra infrastructure (service catalog, LLM proxy, managed settings, mandatory PR template), add links to it in section 8 of the copied file.
+2. Assign the level (Prototype / Production; for Production — customers: yes / no) and explain why; write down the transition event.
+3. For Production (steps 3–8; a prototype does not need them), take the baseline `templates/CLAUDE.md.template.md`. If you already have extra infrastructure (service catalog, LLM proxy, managed settings, mandatory PR template), add links to it in section 8 of the copied file.
 4. Copy the baseline into the project as `CLAUDE.md` and/or `AGENTS.md`.
 5. Fill in the baseline placeholders §1–§3 — including §3.1 "What the environment enforces, and what this file says" — and section 8. Do not rewrite rules §4–§7. Keep the file short: only the non-obvious, target ≤~150 lines.
-6. Create or update the `README`: what it is, how to run it, who the owner is, lifecycle, sunset date for T1.
-7. For T2+, turn on deterministic checks in CI from day one: build and tests, secrets, slopsquatting check / internal package mirror, SAST high/critical, license scan, CODEOWNERS (including agent configuration). Probabilistic checks (AI review) — advisory only.
-8. For T2+, create `openspec/` or record the first spec before code; name the expected outcome in it.
+6. For Production, create or update the `README`: what it is, how to run it, who the owner is, lifecycle.
+7. For Production, turn on deterministic checks in CI from day one: build and tests, secrets, slopsquatting check / internal package mirror, SAST high/critical, license scan, CODEOWNERS (including agent configuration), a detector of weakened checks; set up branch protection in the repository settings, out of the agent's reach. Probabilistic checks (AI review) — advisory only; the exception is a fail-closed gate on the agent's untrusted input, set up as a harness hook rather than in CI (§5 #41).
+8. For Production, create `openspec/` or record the first spec before code; name the expected outcome in it.
 9. Prepare the `registry.md` entry using `templates/project-registry-entry.md`.
 10. Fill in `templates/init-result.md` and put the next actions into the nearest PR/issue.
 
@@ -51,9 +49,8 @@ The transition is triggered by an event, not by feel: shown outside your team; s
 The project is ready for its first meaningful PR if:
 
 - There is an owner.
-- The mode and tier are recorded in the README or the registry; the transition event is named.
-- There is a `CLAUDE.md`/`AGENTS.md` for T1+, with §3.1 filled in.
-- For T1 there is a sunset date.
-- For T2+ the deterministic checks are on in CI, or recorded as explicit debt with an owner and a deadline.
-- For T2+ there is no direct lethal trifecta: private data + untrusted input + external channel.
-- For T2+ the expected outcome is named.
+- The level and the "customers" flag are recorded in the README or the registry; the transition event is named.
+- For Production there is a `CLAUDE.md`/`AGENTS.md`, with §3.1 filled in.
+- For Production the deterministic checks are on in CI, or recorded as explicit debt with an owner and a deadline.
+- For Production there is no direct lethal trifecta: private data + untrusted input + external channel.
+- For Production the expected outcome is named.

@@ -1,6 +1,6 @@
 ---
 name: bible-review-pr
-description: Pre-PR / PR review per the "Vibe Engineering Bible" — scope, AI disclosure (Assisted-by), dependencies and agent configuration, tests, security, spec, evidence bundle and outcome; a verdict with sin shortcodes. Use before opening or merging an AI PR and before a T2/T3 release ("review this PR against the bible", "pre-PR review", "review this diff"). Advisory; a human decides on the merge.
+description: Pre-PR / PR review per the "Vibe Engineering Bible" — scope, AI disclosure (Assisted-by), dependencies and agent configuration, tests, security, spec, evidence bundle and outcome; a verdict with sin shortcodes. Use before opening or merging an AI PR and before a Production release ("review this PR against the bible", "pre-PR review", "review this diff"). Advisory; a human decides on the merge.
 ---
 
 # Playbook: pre-PR / PR review per the bible
@@ -9,7 +9,7 @@ description: Pre-PR / PR review per the "Vibe Engineering Bible" — scope, AI d
 
 ## Goal
 
-Check a change before merge: has the scope spread, have AI-specific risks appeared, is the DoD of the current tier met, is there an evidence bundle, and are there grounds to reject it with a normalized sin shortcode.
+Check a change before merge: has the scope spread, have AI-specific risks appeared, is the DoD of the current level met, is there an evidence bundle, and are there grounds to reject it with a normalized sin shortcode.
 
 This review is a probabilistic check: it advises, a human decides. The agent does not review its own diff as the final reviewer, and its "LGTM" does not replace human review.
 
@@ -17,14 +17,16 @@ This review is a probabilistic check: it advises, a human decides. The agent doe
 
 - Before opening a large PR.
 - Before merging an AI-tagged PR.
-- Before a T2/T3 release.
+- Before a Production release.
 - After the agent produced a substantial part of the diff.
 
 ## Inputs
 
 - Diff, branch, or PR.
-- Project tier T1/T2/T3.
+- Project level (Prototype / Production) and the "customers" flag (yes / no).
 - Related spec: `openspec/changes/<x>/proposal.md` or the task plan.
+- The accepted intent `intent/<date>-<name>.md`, if the change started from one.
+- `REVIEW.md` in the repo root, if there is one: passes, what matters, the nit limit, what not to review (§7 of the bible).
 - Which checks have already been run.
 
 ## Steps
@@ -35,11 +37,11 @@ This review is a probabilistic check: it advises, a human decides. The agent doe
 4. Check scope: the diff changes only what was declared.
 5. Check new dependencies: existence, reputation, lockfile, license/security scan. Agent configuration (skills, plugins, MCP, hooks, `AGENTS.md`) is a dependency too: owner, review, pinning.
 6. Check tests: no deleted assertions, no tautological tests, tests check the requirement from the spec, written in a separate context.
-7. Check security: secret leaks, input validation, authz, SQL/HTML injection, fail-open, lethal trifecta, agent autonomy beyond the tier.
-8. For T2+, check conformance to the spec/proposal, closed `tasks.md`, and whether the expected outcome is named.
+7. Check security: secret leaks, input validation, authz, SQL/HTML injection, fail-open, lethal trifecta, agent autonomy beyond the level.
+8. In Production, check conformance to the spec/proposal, closed `tasks.md`, and whether the expected outcome is named. The diff matches `design.md`/`tasks.md`; if the implementation drifted from the plan, the plan is fixed in the same PR.
 9. Check the evidence bundle: link to the spec, check run, known gaps.
 10. Check who approves: whoever assigned the task to the agent does not approve that agent's PR; AI review without a human is `#sycophancy`.
-11. For T3, check the two-person rule, the release process/runbook, and the critical DoD §5 rows.
+11. With customers, check the second senior+ reviewer, the release process/runbook, and the DoD §5 rows in the "+ customers" column.
 12. Formulate the result: blocker, must-fix before merge, advisory, follow-up.
 
 ## PR comments

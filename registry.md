@@ -31,15 +31,15 @@ and **Mode**.
 
 ## Projects
 
-| Project / adopter | Repo (if public) | Owner / contact | Profile | Tier | Mode | Baseline | Last audit | Status | Next action | Date |
+| Project / adopter | Repo (if public) | Owner / contact | Profile | Level | Mode | Baseline | Last audit | Status | Next action | Date |
 |---|---|---|---|---|---|---|---|---|---|---|
-| _Example Org / project_ | _github.com/example/repo_ | _@handle_ | _II_ | _T2_ | _audit_ | _CLAUDE.md_ | _2026-06-21_ | _advisory_ | _enable deterministic checks in CI_ | _2026-06-21_ |
+| _Example Org / project_ | _github.com/example/repo_ | _@handle_ | _II_ | _Production_ | _audit_ | _CLAUDE.md_ | _2026-06-21_ | _advisory_ | _enable deterministic checks in CI_ | _2026-06-21_ |
 
 <!-- The row above is a sample. Delete it when adding the first real entry. -->
 
 ## Maintenance rules
 
-- Update the row after an audit, a change of risk tier, enabling a gate, or archiving.
+- Update the row after an audit, a change of level or the arrival of customers, enabling a gate, or archiving.
 - Do not keep secrets, internal links with sensitive data, or long reports here.
   Details live in audit reports; this is only an index.
 - If a project became the source of a change to the bible, say so in a proposal per

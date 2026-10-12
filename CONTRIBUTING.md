@@ -56,9 +56,10 @@ Local → Submitted → Accepted (patterns.md, advisory)
   (Echoes the number 3 from §4½, but it is a different metric: there it is
   repetitions in one team per quarter; here it is independent adopters.)
 - **Cadence** — promotion into the core no more than once a quarter (in sync with
-  the quarterly bible review). The same review **removes** what is outdated:
-  catalog entries that are already enforced by the environment or have lost
-  relevance move to `deprecated`.
+  the quarterly bible review); the cadence switches on with the first record of a
+  live application in `registry.md` (Appendix E of the bible). The same review
+  **removes** what is outdated: catalog entries that are already enforced by the
+  environment or have lost relevance move to `deprecated`.
 - **The reasoned ADR** lives in [`docs/adr/`](./docs/adr/): context, decision,
   rationale with a link to the source, consequences. Example —
   [`docs/adr/0001-bible-2.0.md`](./docs/adr/0001-bible-2.0.md).
@@ -99,10 +100,10 @@ fact or details of their use. For them:
 - **Not registering is normal.** The registry deliberately undercounts; absence
   from it ≠ non-use.
 - **Need an aggregate entry without disclosure** (a pseudonym like "fintech, ~200
-  engineers, profile III, tiers T2–T3") — that goes through a **private channel,
-  not a PR** (only a non-PR transport preserves anonymity; a PR deanonymizes the
-  author). In v1 the channel is not built yet — message the maintainer directly,
-  the door is open, we will add the infrastructure on demand.
+  engineers, profile III, Production + customers") — that goes through a **private
+  channel, not a PR** (only a non-PR transport preserves anonymity; a PR
+  deanonymizes the author). In v1 the channel is not built yet — message the
+  maintainer directly, the door is open, we will add the infrastructure on demand.
 
 ## 5. Why exactly this way (self-consistency)
 

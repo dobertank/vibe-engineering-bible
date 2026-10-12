@@ -2,7 +2,7 @@
 
 This repository can serve as a **point of righteousness**: a git-first source of rules against which live projects go through initialization, audit, PR review, and feedback into the bible itself. The canonical framing is Appendix F of the bible ("Applying the bible to projects"); this file holds the order of operations.
 
-The bible does not replace an engineering decision. It sets the norm, the language of violations, and the minimal set of artifacts. A human still makes the final call: merge, postpone, rewrite, change the risk tier, or update the bible itself.
+The bible does not replace an engineering decision. It sets the norm, the language of violations, and the minimal set of artifacts. A human still makes the final call: merge, postpone, rewrite, move the project to Production, or update the bible itself.
 
 ## 1. Roles
 
@@ -10,7 +10,7 @@ The bible does not replace an engineering decision. It sets the norm, the langua
 
 **Harness owner** — owns the agent's environment: managed settings, the LLM proxy, the catalog of development-agent skills. Moves what the bible makes mandatory from text into the environment.
 
-**Project owner** — makes sure the project applies the bible correctly: mode and risk tier, baseline file, DoD, registry entry, follow-ups.
+**Project owner** — makes sure the project applies the bible correctly: level (Prototype / Production, "+ customers"), baseline file, DoD, registry entry, follow-ups.
 
 **Reviewer** — checks a PR or an audit report against §7 of the bible and the sin shortcodes from §4½.
 
@@ -20,16 +20,16 @@ The bible does not replace an engineering decision. It sets the norm, the langua
 
 | Mode | When to use | Input | Output |
 |---|---|---|---|
-| Init a new project | There is an idea; a new repo/folder/prototype is needed | Goal, users, data, expected lifetime | `README`, `CLAUDE.md`/`AGENTS.md`, mode and tier T0–T3, `registry.md` entry, init result |
-| Audit an existing project | The project exists; you need to understand maturity and risks | Repo path, project goal, declared tier | Audit report with blocker/warn/note and next actions |
-| Pre-PR / PR review | Before a large commit, a PR, or a release | Diff/branch/PR, project tier, related spec | Findings per §7, DoD gaps, sin shortcodes, evidence bundle |
+| Init a new project | There is an idea; a new repo/folder/prototype is needed | Goal, users, data, expected lifetime | `README`, `CLAUDE.md`/`AGENTS.md`, level (Prototype / Production, customers yes / no), `registry.md` entry, init result |
+| Audit an existing project | The project exists; you need to understand maturity and risks | Repo path, project goal, declared level | Audit report with blocker/warn/note and next actions |
+| Pre-PR / PR review | Before a large commit, a PR, or a release | Diff/branch/PR, project level, related spec | Findings per §7, DoD gaps, sin shortcodes, evidence bundle |
 | Feedback loop into the bible | A useful pattern or a new risk repeated | Observation, evidence, where it repeated | An entry in `patterns.md` or a proposal to change the bible, the template, or a playbook |
 
 ## 3. Basic process
 
 1. Pick a mode from the table above.
 2. Open the matching playbook in `playbooks/` (or invoke it as an agent skill — §6).
-3. Ask the agent to read not only the project but also the bible: at least §3 (risk tiers), §4, §4½, §5, §6 (the loop), §7, §8, and §10.
+3. Ask the agent to read not only the project but also the bible: at least §2–§3 (levels and "+ customers"), §4, §4½, §5, §6 (the loop), §7, §8, and §10.
 4. Get the report in the format from `templates/`.
 5. The project owner decides: fix now, open a follow-up, move the rule into the environment, turn on a check.
 6. If the application became real, add or update the row in `registry.md`.
@@ -39,7 +39,7 @@ The bible does not replace an engineering decision. It sets the norm, the langua
 
 ```text
 Read vibe-engineering-bible.md, usage.md and playbooks/audit-project.md.
-Audit the project at /path/to/repo as T2.
+Audit the project at /path/to/repo as Production without customers.
 Produce the report using templates/audit-report.md.
 Do not change project files without a separate confirmation.
 ```
@@ -48,7 +48,7 @@ For a PR:
 
 ```text
 Read vibe-engineering-bible.md and playbooks/review-pr.md.
-Review the current diff as a pre-PR review for T2.
+Review the current diff as a pre-PR review for Production without customers.
 Show blocker/warn/note first, then propose minimal fixes.
 ```
 
@@ -56,8 +56,8 @@ Show blocker/warn/note first, then propose minimal fixes.
 
 The first application of the bible to a project is an audit: a report, an explanation, next actions. After that, checks are turned on by class (the "Gate" column in DoD §5 and §9 of the bible):
 
-- **Deterministic** — build and tests, secrets, packages only from an internal mirror / slopsquatting check, SAST high/critical, license scan, human review (whoever assigned the task to the agent does not approve that agent's PR), ban on auto-merge. They block from the first day they are turned on — together with a path to fix.
-- **Probabilistic** — AI review, LLM judge, mutation score, soft PR-size limit. The path is advisory → calibration → block: block only after calibration on your own data.
+- **Deterministic** — build and tests, secrets, packages only from an internal mirror / slopsquatting check, SAST high/critical, license scan, human review (whoever assigned the task to the agent does not approve that agent's PR), a detector of weakened checks (branch protection out of the agent's reach), ban on auto-merge (except low-risk Production changes without customers, per risk assessment). They block from the first day they are turned on — together with a path to fix.
+- **Probabilistic** — AI review, LLM judge, mutation score, soft PR-size limit. The path is advisory → calibration → block: block only after calibration on your own data. The exception is security gates on untrusted input: fail-closed immediately (§5 #41).
 - **Human decisions** — sign-offs, proposal approval, threat model: DoD rows, not an automatic gate.
 
 **Consequences** (§4½ of the bible). A mortal sin blocks: the PR is not merged until it is fixed; blameless review. A venial sin — back for rework. A recurring pattern is a reason to fix the process or the environment, not the person.

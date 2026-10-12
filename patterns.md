@@ -30,7 +30,7 @@ Step details and roles — [`CONTRIBUTING.md`](./CONTRIBUTING.md), §2.
 
 ```
 ### P-NNN · Short name
-- Context: profile · tier · stack (where observed)
+- Context: profile · level · stack (where observed)
 - Observation: what went wrong / what worked (1–3 lines, ideally with an incident)
 - Proposed rule: imperative, verifiable
 - Root: which commandment / sin / DoD it maps to (or "new area")
@@ -70,7 +70,7 @@ Two levels:
 ### Queue
 
 #### P-001 · Unvetted agent skill — contender `#unvetted-skill`
-- Context: all profiles · T1–T3 · agent clients that support skills, plugins, MCP
+- Context: all profiles · Production · agent clients that support skills, plugins, MCP
 - Observation: a skill, plugin, or MCP server is connected to the repo or to the
   agent's environment without review, an owner, or version pinning — from a
   marketplace or via a link.
@@ -87,7 +87,7 @@ Two levels:
 - Status: submitted
 
 #### P-002 · Rule only in text — contender `#rules-in-prompt`
-- Context: all profiles · T1–T3
+- Context: all profiles · Production
 - Observation: a mandatory rule (secrets, forbidden commands, pre-merge checks)
   lives only in `CLAUDE.md`/`AGENTS.md` or in a prompt, without enforcement in
   agent settings, hooks, or CI.
@@ -102,7 +102,7 @@ Two levels:
 - Status: submitted
 
 #### P-003 · Closed without an outcome — contender `#metric-free`
-- Context: all profiles · T2–T3
+- Context: all profiles · Production
 - Observation: work is closed on PR merge; the expected outcome in the product is
   neither named in the spec nor verified after rollout.
 - Proposed rule: the outcome is named in the spec before code; the task is closed

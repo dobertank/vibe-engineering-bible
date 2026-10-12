@@ -2,7 +2,7 @@
 
 Date: <YYYY-MM-DD>
 Owner: <name/team>
-Mode and tier: <experiment (T0) / T1 / T2 / T3>
+Level: <Prototype / Production> · customers: <yes / no>
 Expected lifetime: <duration>
 Baseline: <CLAUDE.md / AGENTS.md / both / none>
 
@@ -10,22 +10,22 @@ Baseline: <CLAUDE.md / AGENTS.md / both / none>
 
 <What we are building, for whom, which data, which constraints.>
 
-Expected outcome: <what will change in the product and how we will confirm it; mandatory for T2+>
+Expected outcome: <what will change in the product and how we will confirm it; mandatory for Production>
 
-## Tier Decision
+## Level Decision
 
-Chosen tier: <T0/T1/T2/T3>
+Chosen level: <Prototype / Production> · customers: <yes / no>
 
 Why:
 
 - <reason>
 - <reason>
 
-Event that moves it to the next tier (by event, not by feel):
+Transition event (Prototype → Production or Production → "+ customers"; by event, not by feel):
 
 - <trigger>
 
-Agent autonomy at this tier: <T0 — acts on its own in an isolated environment / T1–T2 — works on its own, changes reach shared code only after human review / T3 and sensitive data — only proposals or actions with mandatory human confirmation>
+Agent autonomy at this level: <Prototype — acts on its own in an isolated environment / Production — works on its own, changes reach shared code only after human review / + customers and sensitive data — only proposals or actions with human confirmation>
 
 ## Created / Updated
 
@@ -41,11 +41,11 @@ Agent autonomy at this tier: <T0 — acts on its own in an isolated environment 
 | Requirement | Status | Comment |
 |---|---|---|
 | Owner assigned | pass/fail | |
-| Mode and tier recorded; transition event named | pass/fail | |
-| Sunset date for T1 | pass/fail/n-a | |
+| Level and the "customers" flag recorded; transition event named | pass/fail | |
+| Prototype: the environment holds the three boundaries, lifetime ≤30 days | pass/fail/n-a | |
 | Baseline installed, §3.1 "What the environment enforces" filled in | pass/fail/n-a | |
-| T2+ deterministic checks on, or recorded as debt with an owner | pass/fail/n-a | |
-| Outcome named in advance (T2+) | pass/fail/n-a | |
+| Production deterministic checks on, or recorded as debt with an owner | pass/fail/n-a | |
+| Outcome named in advance (Production) | pass/fail/n-a | |
 | Lethal trifecta excluded | pass/fail/n-a | |
 
 ## Next Actions

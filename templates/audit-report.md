@@ -3,8 +3,8 @@
 Date: <YYYY-MM-DD>
 Repo/path: <link-or-path>
 Owner: <name/team>
-Declared tier: <T0/T1/T2/T3>
-Actual tier: <T0/T1/T2/T3/unknown> (by the transition events, §3 of the bible)
+Declared level: <Prototype / Production> · customers: <yes / no>
+Actual level: <Prototype / Production / unknown> · customers: <yes / no> (by the transition events, §2–§3 of the bible)
 Mode: <first audit / quarterly / pre-PR / pre-release>
 Result: <pass / advisory / fail>
 
@@ -20,8 +20,8 @@ Result: <pass / advisory / fail>
 
 Severity and consequences (§4½ of the bible):
 
-- `blocker` — a mortal sin or a mandatory DoD item: the PR/release at the declared tier does not pass until fixed; blameless review.
-- `warn` — a venial sin or a DoD/baseline gap: fix before a tier change or before a check is turned on.
+- `blocker` — a mortal sin or a mandatory DoD item: the PR/release at the declared level does not pass until fixed; blameless review.
+- `warn` — a venial sin or a DoD/baseline gap: fix before the move to Production, onboarding customers, or turning on a check.
 - `note` — an improvement without immediate risk. A recurring pattern is a reason to fix the environment or the process.
 
 ## DoD Snapshot
@@ -47,7 +47,7 @@ Severity and consequences (§4½ of the bible):
 | <e.g.: secrets are not committed> | <hook / CI / text only> | deterministic / probabilistic / human decision | blocks / advises / none |
 
 - Rules that live only in text but are machine-checkable: `<list>`
-- Probabilistic checks that block without calibration: `<list or none>`
+- Probabilistic checks that block without calibration (except fail-closed security gates on untrusted input, §5 #41): `<list or none>`
 
 ## Checks
 
