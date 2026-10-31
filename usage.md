@@ -51,50 +51,40 @@ Check classes (D / P / H) and the "advisory → calibration → block" path — 
 
 ## 6. Playbooks as development-agent skills
 
-The playbooks are the source of truth. Copying a playbook alone loses dependencies. The builder creates four relocatable packages:
+The local candidate ships four ready folders under `skills/`; installation does not run Python. The [README installation](./README.md#install-ready-skills-local-candidate) uses a local checkout because these folders have not been published yet. The existing `v2.1.1-en` release is the earlier builder-based package, not this candidate.
 
-| Skill | Source |
-|---|---|
-| `bible-init-project` | `playbooks/init-project.md` |
-| `bible-audit-project` | `playbooks/audit-project.md` |
-| `bible-review-pr` | `playbooks/review-pr.md` |
-| `bible-propose-change` | `playbooks/propose-bible-change.md` |
+| Skill | Use | Source |
+|---|---|---|
+| `bible-audit-project` | Requested existing-project Bible audit | `playbooks/audit-project.md` |
+| `bible-review-pr` | Requested review of a supplied diff or exact base/head | `playbooks/review-pr.md` |
+| `bible-init-project` | Requested Bible initialization/adoption | `playbooks/init-project.md` |
+| `bible-propose-change` | Local proposal to change the Bible standard | `playbooks/propose-bible-change.md` |
 
-Each contains a short `SKILL.md` router, the public resources under `references/bible/`, and `SOURCE.json`. All Bible-relative paths resolve from that bundled root; the target project is a separate input. Output belongs in the destination requested by the user, outside skill resources.
+Use the audit first when assessing an existing repository. A feature request does not activate a Bible audit or standard-change proposal. A review needs an actual comparison; init preserves existing project instructions; proposal drafts do not authorize upstream actions.
 
-For the pinned v2.1.1-en source and local installation, use the [README commands](./README.md#install-v211-en-skills). The commands below build from any reviewed checkout.
+Each `SKILL.md` is generated from its source playbook's contract. It includes triggers, exclusions, inputs, output, reading order and boundaries. All Bible paths resolve under its adjacent `references/bible/`; the target project is a separate input. No separate Bible checkout or builder execution is needed during use. Keep each entire folder with its `SOURCE.json` and MIT LICENSE.
 
-### Build and check
+The bundle keeps the full public corpus and banner. Bible-maintenance instructions are retained as inert `AGENTS.maintenance.md` and `CLAUDE.maintenance.md`, with their maintenance links/import mapped to those names. They are not active target instructions. Actual target instructions and the user's requested language govern responses. The original root AGENTS/CLAUDE are unchanged and still apply when maintaining this repository.
 
-From this checkout, with Python 3.9+ and no third-party packages:
+### Maintaining the generated skills
+
+Python 3.9+ standard library is only for maintainers. From a source checkout:
 
 ```sh
-python3 -m unittest discover -s tests -v
+python3 -B -m unittest discover -s tests -v
+python3 scripts/package_skills.py --check
 skill_build=$(mktemp -d)
 python3 scripts/package_skills.py --output "$skill_build/skills"
 ```
 
-The builder reads an allowlist of public source paths; it does not download anything or change client settings. It rejects resource symlinks, an output symlink, and existing skill folders; it validates inputs and all four destination names before writing. `SOURCE.json` records the git base commit when available, a hash of the actual source content, the builder hash, and hashes of every packaged file. A dirty checkout is a local content snapshot, not the pristine base commit. Keep the manifest with the files; hashes detect changes, not trustworthiness. Git is optional; an unpacked snapshot has a null base commit.
+`--check` compares current generated files without writing, including missing, extra, changed or symlink entries. To update, generate into a new output, inspect its diff against the four checked-in trees, confirm no unknown local changes, then copy only those reviewed trees. Existing destinations are never overwritten by `--output`; no installer or refresh manager is provided. Checked-in `skills/` is never a generator input, so packages do not recursively include themselves.
 
-### Install into an isolated project
+`SOURCE.json` records exact bundled-resource content identity, builder hash and all packaged file hashes; it excludes itself. `base_commit` is always null: moving HEAD without changing source bytes cannot create drift, and unpacked copies produce identical bytes. Git revision belongs in an external report or release tag. Canon and LICENSE are copied byte-for-byte; only maintenance filenames and their bounded links/import are mapped. Hashes detect change, not trustworthiness.
 
-Review the sources first. The following creates a new temporary project and installs all four packages into its local skills directory. Run it from the Bible checkout:
-
-```sh
-skill_demo=$(mktemp -d)
-mkdir -p "$skill_demo/.agents/skills"
-python3 scripts/package_skills.py --output "$skill_demo/.agents/skills"
-printf 'Open this project in your agent: %s\n' "$skill_demo"
-```
-
-A local installation controls where skill files reside; it does not make the model local. Use only the model and data scope already authorized by the project owner. Files read by a hosted model enter its context; the first-audit prompt prohibits additional external tool calls and uploads. Existing access and data-flow controls still apply.
-
-Open that temporary project in Codex, start a new session, and request `$bible-audit-project` with an absolute target-project path, purpose, users, level and execution limits. Where another client supports project-local Agent Skills, use its documented skills directory and copy each entire package, preserving `references/` and `SOURCE.json`. Discovery and behavior depend on the client; packaging alone does not prove compatibility. No global installation is needed.
-
-For an existing project, choose a reviewed destination and build there explicitly. Existing packages are never replaced: review an update in a separate directory before changing an installed version. Keep the catalog in git with owners and reviewed changes; external skills are dependencies under Commandment V.
+The bundled maintenance source can regenerate packages into a fresh destination without the original checkout. Checkout-only `--check` expects the four checked-in trees; an installed package intentionally has no recursive `skills/` copy. Its portable unit fixtures run independently, with that one checkout-only test skipped.
 
 ### Verification limits
 
-Local unit tests and build/install checks verify package structure, dependencies, hashes, relocation, and refusal behavior. They do not measure audit quality or establish compatibility with every agent. The [public example](./examples/audit/README.md) lets a person reproduce the stated facts without running project code. Client smoke results, when available, are bounded observations; no cross-client or general reliability claim follows from them.
+Packaging checks cover metadata, content identity, complete references/license, inert maintenance instructions, relocation, refusal behavior and freshness. Real local CLI installation and bounded synthetic Codex cases are recorded separately in local implementation evidence; neither structural checks nor a small behavioral comparison proves effectiveness, whole-system safety or compatibility with every client. Claude execution is not established. The [public example](./examples/audit/README.md) supports reproducing its facts and one fix/recheck, not scoring an agent.
 
-A skill packages the procedure; the canon and the user's authorized scope still apply. Registration is opt-in, the agent prepares a draft, and a human opens any upstream PR.
+Local installation does not make a hosted model local. Use only a model and data scope already authorized by the project owner; keep access/data-flow controls. A skill grants no additional external permissions. Registration is opt-in; the agent prepares a draft and a human opens any upstream PR.

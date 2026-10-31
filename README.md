@@ -4,48 +4,39 @@
 
 Rules and working playbooks for developers and maintainers using AI assistants. Start with a repository audit: findings tied to evidence, Bible requirements, and minimal fixes. A human decides what to change.
 
-The main product is Markdown: the canon, templates, and four playbooks. No skill installation is needed for a first audit. To build and install the four skills locally, see [usage §6](./usage.md#6-playbooks-as-development-agent-skills) (Python 3.9+, standard library only).
-
-## Install v2.1.1-en skills
-
-With Python 3.9+ and git, run from an empty directory:
-
-```sh
-git clone --branch v2.1.1-en --single-branch --depth 1 https://github.com/dobertank/vibe-engineering-bible.git
-cd vibe-engineering-bible
-python3 -B -m unittest discover -s tests -v
-skill_project=$(mktemp -d)
-python3 scripts/package_skills.py --output "$skill_project/.agents/skills"
-printf 'Open this project in Codex: %s\n' "$skill_project"
-```
-
-This installs all four skills into a new temporary project's local `.agents/skills`; it changes no global client settings. Open the printed project in Codex and request `$bible-audit-project` with the absolute path to this clone's `examples/audit/fixture/`. Use the [synthetic example's scope](./examples/audit/README.md) and the [first-audit prompt](#first-audit). Discovery and behavior depend on the client; [verification limits](./usage.md#verification-limits) apply.
+The main product is Markdown: the canon, templates, and four playbooks. Start with an audit, compare the evidence, and choose one fix. The local candidate also includes four ready skills; [installation](#install-ready-skills-local-candidate) does not require Python. Python is only a [maintenance tool](./usage.md#maintaining-the-generated-skills).
 
 ## First audit
 
-Open a local Bible checkout and the target project in a file-reading agent. Use a model already authorized by the project owner to process these files; a hosted model receives the context it reads. Replace both paths below with absolute paths. State the purpose and known users; leave unknown facts as `unknown`.
+Use `bible-audit-project` in a file-reading agent with a model already authorized for these files; a hosted model receives the context it reads. The skill includes its Bible resources, so no separate Bible checkout is needed. State the purpose and known users; leave unknown facts as `unknown`. Without installing a skill, the same procedure is available in the [source playbook](./playbooks/audit-project.md).
 
 ```text
-Bible: /absolute/path/to/vibible
+Use $bible-audit-project.
 Target project: /absolute/path/to/project
 Purpose and users: <what it does, who uses it>
 Declared level: <Prototype / Production / unknown>; customers: <yes / no / unknown>.
 Mode: first audit; next step: <merge / release / orientation>.
-Read vibe-engineering-bible.md, usage.md, playbooks/audit-project.md,
-and templates/audit-report.md in the Bible directory.
-Audit the target using that playbook. Resolve norm/template paths from
-the Bible root and evidence paths from the project root.
-Return the report in your response: blocker/warn/note, evidence
-(path:lines or command and result), requirement, and minimal fix.
-Mark inaccessible settings and unrun checks unknown.
-Read only: do not edit files, install dependencies, or run project code.
-Do not make external tool calls or upload data beyond the authorized
-model context. Keep the existing access and data-flow controls.
+Use the skill's bundled Bible and audit-report template.
+Return blocker/warn/note findings with evidence (target path:lines or
+command and result), requirement, minimal fix and recheck.
+Mark inaccessible settings and unrun checks unknown, not failed.
+Read only: do not edit files, install dependencies or run project code.
+Do not make external tool calls or uploads beyond the authorized model context.
 ```
 
 Try it on [the synthetic fixture](./examples/audit/fixture/) using the scope in [the complete example](./examples/audit/README.md). Its report illustrates a `warn` for an outdated level, a `blocker` for the missing Production baseline before merge, and a `note` about the limits of local CI evidence. Reproduction commands include one fix, a recheck, and a negative control.
 
 Check the evidence, choose one fix, and repeat the relevant check. An audit report does not certify project safety; unverified checks remain visible. The example is synthetic and is not a benchmark or a registered adoption.
+
+## Install ready skills (local candidate)
+
+Publication is pending. The published `v2.1.1-en` does not contain these ready skill folders; use this local candidate, not an unannounced GitHub install command. From your target project, with Node.js 22.20+:
+
+```sh
+DISABLE_TELEMETRY=1 DO_NOT_TRACK=1 npx --yes skills@1.7.4 add /absolute/path/to/this/local/checkout --copy --agent codex --skill bible-audit-project --yes
+```
+
+This copies the ready audit skill into the current project's local skills directory. Start a fresh agent session, then use the first-audit prompt above. Choose `bible-init-project`, `bible-review-pr` or `bible-propose-change` for the other scenarios; [usage §6](./usage.md#6-playbooks-as-development-agent-skills) lists all four. The npm runner may fetch its pinned CLI on first use; the skill itself needs only its installed files, without Python or access to the original checkout. Review source and permissions before use.
 
 **Version 2.0 · October 2026** — the first version for adoption. Core changes after it go through a reasoned ADR (Appendix E of the bible).
 
