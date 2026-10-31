@@ -1,11 +1,11 @@
 ---
 name: bible-propose-change
-description: Propose a change to the "Vibe Engineering Bible", the template, or a playbook from repeated practice — an entry in patterns.md, a proposal in the built-in format, and for the core a reasoned ADR. Use when a finding has repeated 3+ times or a new risk class with evidence has appeared ("propose a bible change", "this should go into the standard", "propose bible change"). The agent prepares a draft; a human opens the PR.
+description: Use when a finding repeats across projects, a verified new risk appears, or a Bible rule may be outdated and needs an evidence-based change proposal.
 ---
 
 # Playbook: propose a change to the bible
 
-> Development-agent skill: this file can be shipped as `SKILL.md` (see `usage.md` §6). Framing — Appendix F and the Appendix E gate of the bible.
+> Development-agent skill: the builder creates a `SKILL.md` router and pinned resources from this source (see `usage.md` §6). Framing — Appendix F and the Appendix E gate of the bible.
 
 ## Goal
 

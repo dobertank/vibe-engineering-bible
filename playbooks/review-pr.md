@@ -1,11 +1,11 @@
 ---
 name: bible-review-pr
-description: Pre-PR / PR review per the "Vibe Engineering Bible" — scope, AI disclosure (Assisted-by), dependencies and agent configuration, tests, security, spec, evidence bundle and outcome; a verdict with sin shortcodes. Use before opening or merging an AI PR and before a Production release ("review this PR against the bible", "pre-PR review", "review this diff"). Advisory; a human decides on the merge.
+description: Use when an AI-assisted diff or pull request needs review against the Vibe Engineering Bible before opening, merging, or a Production release.
 ---
 
 # Playbook: pre-PR / PR review per the bible
 
-> Development-agent skill: this file can be shipped as `SKILL.md` (see `usage.md` §6). Framing — Appendix F of the bible.
+> Development-agent skill: the builder creates a `SKILL.md` router and pinned resources from this source (see `usage.md` §6). Framing — Appendix F of the bible.
 
 ## Goal
 
@@ -38,9 +38,9 @@ This review is a probabilistic check: it advises, a human decides. The agent doe
 5. Check new dependencies: existence, reputation, lockfile, license/security scan. Agent configuration (skills, plugins, MCP, hooks, `AGENTS.md`) is a dependency too: owner, review, pinning.
 6. Check tests: no deleted assertions, no tautological tests, tests check the requirement from the spec, written in a separate context.
 7. Check security: secret leaks, input validation, authz, SQL/HTML injection, fail-open, lethal trifecta, agent autonomy beyond the level.
-8. In Production, check conformance to the spec/proposal, closed `tasks.md`, and whether the expected outcome is named. The diff matches `design.md`/`tasks.md`; if the implementation drifted from the plan, the plan is fixed in the same PR.
+8. If §6 requires a proposal for this change, check conformance to it and closed `tasks.md`; otherwise check the stated task. Check that the expected outcome is named. Where `design.md`/`tasks.md` exist, the diff matches them and deviations are recorded in the same PR.
 9. Check the evidence bundle: link to the spec, check run, known gaps.
-10. Check who approves: whoever assigned the task to the agent does not approve that agent's PR; AI review without a human is `#sycophancy`.
+10. Check the §3 mode: in a team the approver did not assign the task to the agent; solo without customers permits a human author check, not independent review. AI review does not replace it. Auto-merge is allowed only under the existing §3 conditions; otherwise this is `#sycophancy`.
 11. With customers, check the second senior+ reviewer, the release process/runbook, and the DoD §5 rows in the "+ customers" column.
 12. Formulate the result: blocker, must-fix before merge, advisory, follow-up.
 
@@ -64,7 +64,8 @@ Short format:
 Blocker / Must-fix / Advisory / Looks good — the merge decision is a human's
 
 ## Findings
-- [blocker] `#shortcode` / §5 #N / §7 item N — what was found, why it matters, minimal fix.
+- [blocker] `#shortcode` / §5 #N / §7 item N — finding, evidence (path:lines or command and result), impact, minimal fix.
+- Unverified: hypothesis and how to check it; do not present it as a confirmed blocker.
 
 ## Checks
 - Tests: ...

@@ -1,11 +1,11 @@
 ---
 name: bible-init-project
-description: Initialize a new project per the "Vibe Engineering Bible" — level (Prototype / Production, "+ customers"), baseline CLAUDE.md/AGENTS.md, what the environment enforces, registry entry. Use when an idea turns into a new repo, folder, or prototype ("set up a project", "initialize per the bible", "init project").
+description: Use when an idea becomes a new repository, folder, or prototype that will adopt the Vibe Engineering Bible.
 ---
 
 # Playbook: init a new project
 
-> Development-agent skill: this file can be shipped as `SKILL.md` (see `usage.md` §6). Framing — Appendix F of the bible.
+> Development-agent skill: the builder creates a `SKILL.md` router and pinned resources from this source (see `usage.md` §6). Framing — Appendix F of the bible.
 
 ## Goal
 
@@ -34,14 +34,14 @@ The transition is triggered by an event, not by feel: shown outside your team; s
 ## Steps
 
 1. Write a short project brief: goal, expected outcome, users, data, expected lifetime, owner.
-2. Assign the level (Prototype / Production; for Production — customers: yes / no) and explain why; write down the transition event.
+2. Assign the level (Prototype / Production; for Production — customers: yes / no) and explain why; write down the transition event. For Production, name the §3 human-check mode: team review or solo author check without customers; auto-merge only under §3 conditions.
 3. For Production (steps 3–8; a prototype does not need them), take the baseline `templates/CLAUDE.md.template.md`. If you already have extra infrastructure (service catalog, LLM proxy, managed settings, mandatory PR template), add links to it in section 8 of the copied file.
 4. Copy the baseline into the project as `CLAUDE.md` and/or `AGENTS.md`.
-5. Fill in the baseline placeholders §1–§3 — including §3.1 "What the environment enforces, and what this file says" — and section 8. Do not rewrite rules §4–§7. Keep the file short: only the non-obvious, target ≤~150 lines.
+5. Fill in the baseline placeholders §1–§3 — including §3.1 "What the environment enforces, and what this file says" — including access and data-flow controls and how they are verified; a gateway is optional — and section 8. Do not rewrite rules §4–§7. Keep the file short: only the non-obvious, target ≤~150 lines.
 6. For Production, create or update the `README`: what it is, how to run it, who the owner is, lifecycle.
 7. For Production, turn on deterministic checks (class D, §5 of the bible) in CI from day one; set up branch protection in the repository settings, out of the agent's reach. Probabilistic checks (AI review) — advisory only; the exception is a fail-closed gate on the agent's untrusted input, set up as a harness hook rather than in CI (§5 #41).
 8. For Production, create `openspec/` or record the first spec before code; name the expected outcome in it.
-9. Prepare the `registry.md` row (fields — the legend under the registry table).
+9. Optionally prepare a `registry.md` draft row (fields — the legend under the registry table); upstream registration requires the owner's consent and a human-opened PR.
 10. Output the result in the format below and put the next actions into the nearest PR/issue.
 
 ## Definition of Ready
@@ -55,6 +55,8 @@ The project is ready for its first meaningful PR if:
 - For Production the deterministic checks are on in CI, or recorded as explicit debt with an owner and a deadline.
 - For Production there is no direct lethal trifecta: private data + untrusted input + external channel.
 - For Production the expected outcome is named.
+
+Mark unverified environment evidence `unknown`, not `fail`; `fail` means a confirmed mismatch. An unknown mandatory item leaves readiness unconfirmed. A statement in the baseline is not evidence that its control works.
 
 ## Output
 
@@ -73,7 +75,7 @@ Agent autonomy: <Prototype — on its own in an isolated environment / Productio
 README · CLAUDE.md/AGENTS.md · openspec/ · CI: deterministic checks, probabilistic (advisory) · CODEOWNERS on agent configuration · row in registry.md — <yes / no / path / n-a for each>
 
 ## Definition of Ready
-| Item (list above) | pass / fail / n-a | Comment |
+| Item (list above) | pass / fail / unknown / n-a | Comment |
 |---|---|---|
 
 ## Next Actions

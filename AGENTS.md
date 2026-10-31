@@ -4,7 +4,7 @@ Instructions for agents editing the "Vibe Engineering Bible" repo. File map — 
 
 ## Language and style
 
-- Write and respond in **English**. Commits follow Conventional Commits. There is no code or build: do not suggest `npm`, `pytest`, `make`.
+- Write and respond in **English**. Commits follow Conventional Commits. The main product is Markdown; the skill packager uses Python 3.9+ and the standard library. Check it with `python3 -m unittest discover -s tests -v`. Text edits need no build; do not suggest `npm`, `pytest`, `make`.
 - When editing text, follow the principles of §8 of the bible: only the non-obvious, imperative, verifiable specifics; a line that can be removed without losing meaning gets removed.
 - One thought — one place: the canon states the norm, the mechanism lives in the process layer (`usage.md`, `playbooks/`, `templates/`); link instead of repeating.
 - The sacral register (covenants, commandments, sins) is mnemonic, not ideology. The counts "two covenants / eight commandments / thirteen sins" are the same in all files.

@@ -19,11 +19,11 @@ The universal core (§§1–10) applies equally to a solo developer, a five-pers
 
 ## 1. Why
 
-AI tools accelerate code entry. Independent empirical work from 2024–2026 records the other side: defects, security risks, and maintainability debt grow at the same time, and the subjective sense of speed diverges from the measured one. Seven publications set the anchoring picture — METR (the gap between perceived speedup and measurement), GitClear (growth of duplication, decline of refactoring and of legacy maintenance), USENIX Security 2025 (hallucinated package names), Veracode (45% of AI code with OWASP vulnerabilities), Stanford CCS 2023 (less secure code with greater confidence), CodeRabbit (1.7× more issues, up to 2.74× security), Apiiro (4× delivery speed → 10× security risks). DORA 2025 confirms the picture at the organizational level: AI raises delivery throughput, but delivery instability rises with it; human review becomes the bottleneck. Figures and links are in Appendix D.
+AI tools accelerate code entry. Academic studies, independent measurements, and vendor data from 2024–2026 show risks: defects, security risks, and maintainability debt grow at the same time, and the subjective sense of speed diverges from the measured one. Seven publications set the anchoring picture — METR (the gap between perceived speedup and measurement), GitClear (growth of duplication, decline of refactoring and of legacy maintenance), USENIX Security 2025 (hallucinated package names), Veracode (45% of AI code with OWASP vulnerabilities), Stanford CCS 2023 (less secure code with greater confidence), CodeRabbit (1.7× more issues, up to 2.74× security), Apiiro (4× delivery speed → 10× security risks). DORA 2025 confirms the picture at the organizational level: AI raises delivery throughput, but delivery instability rises with it; human review becomes the bottleneck. Figures and links are in Appendix D.
 
 The second wave of empirical work from 2025–2026 answers the question "what to do about it". Companies that scaled agentic development buy the agent core and build an **environment** around it: isolated execution environments, a tool catalog, deterministic checks, mandatory human review (Stripe, Spotify — self-reports, Appendix D). An independent ETH Zürich study showed that context files for agents do not, on average, raise task success and make the work more than 20% more expensive. The conclusion: a rule that must always hold cannot be entrusted to text — the environment enforces it (Commandment IV).
 
-From this empirical work, the two covenants follow: Freedom for Prototype and Discipline for Production — everything that left a personal experiment.
+The two covenants are the author's policy response to this evidence: Freedom for Prototype and Discipline for Production — everything that left a personal experiment.
 
 ## 2. Covenant of Freedom: Prototype
 
@@ -66,6 +66,8 @@ Everything that has outgrown a prototype is **Production** and lives under the C
 | Production | work on its own; changes reach shared code only after human review |
 | + customers and any sensitive data | only proposals or actions with mandatory human confirmation |
 
+**Human review.** In a team, whoever assigned the task to an agent does not approve that agent's PR. A solo developer in Production without customers may perform the human check as the author; this is not independent review. Sensitive data alone does not exclude this solo check: mandatory human confirmation for actions involving it and data controls still apply. AI review does not replace the required human check. The auto-merge exception has only the conditions below.
+
 **Auto-merge** without a human — only in Production without customers and only for low-risk changes: the checks are calibrated on your own data (§5), risk is assessed by a deterministic model (touched paths, size, rollback history), sensitive paths are on a deny-list, there is a daily cap and human spot-checks of what was merged, and if the rollback rate grows, auto-merge switches itself off; with "+ customers" — never.
 
 Lifecycle metadata in a service catalog maps by use: `experiment` or a `prototype` without users → Prototype; anything with users (`mvp`, `beta`, `production`) → Production; customers or a public release → "+ customers"; `deprecated` is a status, not a level.
@@ -82,7 +84,7 @@ AI writes — you answer. The "Claude generated this" defense does not exist. Wi
 *Sins here:* `#workslop`, `#hidden-ai`, `#slot-machine`, `#self-auto`.
 
 ### II. Freedom and Discipline are two different codes
-Every line lives either under the Covenant of Freedom (Prototype) or under the Covenant of Discipline (Production). The transition from Freedom to Discipline happens by event (§2); the customer overlay — through explicit DoD rows (§5). A prototype older than 30 days moves to Production or is deleted; Production code without commits for 90 days — `deprecated`, for 180 — `archived`. No "temporarily in production": the temporary lives the longest.
+Every line lives either under the Covenant of Freedom (Prototype) or under the Covenant of Discipline (Production). The transition from Freedom to Discipline happens by event (§2); the customer overlay — through explicit DoD rows (§5). A prototype older than 30 days moves to Production or is deleted; 90 and 180 days without commits in Production are signals to check ownership, support and security, not proof of abandonment. The owner decides whether to mark it `deprecated` or `archived` based on that review; commit age alone sets neither status. No "temporarily in production": the temporary lives the longest.
 
 *Sins here:* `#zombie`.
 
@@ -90,7 +92,7 @@ Every line lives either under the Covenant of Freedom (Prototype) or under the C
 What you showed is what you promised. Defenses are mandatory and cumulative: (1) visual `PROTOTYPE — NOT PRODUCTION` marking, banner, `[DEMO]` in the title; (2) a **framing slide** before the demo: what is real / what is Wizard-of-Oz (a human behind the curtain or a stub behind the "AI") / what is missing / how far from production; (3) email summary with the same 4 points. **The 10–30× rule:** time to production-grade = demo time × 10–30. No launch date is announced based on a demo without alignment with the release owner.
 
 ### IV. The law lives in the environment
-A rule that must always hold is enforced by the environment, not by text. An agent usually follows the text in `CLAUDE.md` / `AGENTS.md`, but that is no guarantee (ETH, §1); the guarantee comes from agent settings, hooks, an isolated environment, an LLM proxy, and CI. A request in a prompt is a hint; a prohibition in the settings is law.
+A rule that must always hold is enforced by the environment, not by text. An agent usually follows the text in `CLAUDE.md` / `AGENTS.md`, but that is no guarantee (ETH, §1); agent settings, hooks, isolation, access and data-flow controls, and CI enforce specific boundaries. Verify each boundary and its prerequisites in the environment; the presence of a hook alone does not prove the whole system safe. A request in a prompt is a hint; a prohibition in the settings is law.
 
 **The paved road.** The team fixes **a short list of paved-road languages, frameworks, and tools** for which the platform maintains a CI pipeline, SAST rules, templates, on-call expertise. The right path must be the easiest one: a repo template, ready-made checks, a recommended agent client with shared settings. A new language in production — only through an ADR and approval from the platform owner (an architecture council or equivalent). Every language is a separate on-call rotation, separate security rules, separate knowledge gaps. You can leave the paved road — without free support from the platform team and with a justification of trade-offs in an ADR.
 
@@ -104,7 +106,7 @@ Every new import from AI is checked for existence, reputation, and name match be
 **Agent configuration is the same supply chain.** Skills, plugins, MCP servers, hooks, and `AGENTS.md` / `CLAUDE.md` themselves change the agent's behavior just as a dependency changes the code's behavior: they have owners (CODEOWNERS), go through review, and are pinned by version; external ones are connected only through an internal catalog or mirror. 26.1% of skills from public marketplaces contain at least one vulnerability; skills with scripts are 2.12 times riskier (Liu et al., Appendix D). Local MCP servers and third-party IDE extensions — only from an allow-list (CVE-2025-54135 "CurXecute", CVE-2025-59944, CVE-2025-6514 "mcp-remote" — proven RCE chains in 2025; see Appendix D).
 
 ### VI. The lethal trifecta is not crossed
-Willison's formulation: **(private data) + (untrusted content) + (external channel)** simultaneously on one agent — guaranteed exfiltration. Hold at least one wall. Prompt filters are not enough — this is architecture, not text.
+Willison's formulation: **(private data) + (untrusted content) + (external channel)** simultaneously on one agent creates an exfiltration risk. Hold at least one wall. Prompt filters are not enough — this is architecture, not text.
 
 Concretely:
 - The default wall is **an isolated environment**: the agent cannot reach production data, secrets live outside its environment, outbound traffic goes through an allowlist.
@@ -121,7 +123,7 @@ Concretely:
 *Sins here:* `#sandbox-bypass`, `#trifecta`, `#promptable`.
 
 ### VII. Reviewing AI code is a different genre
-You are not hunting for typos, but for: hallucinated APIs, tautological tests, deleted asserts, excessive abstractions, hidden scope expansion. **PR-size:** target ≤200 LOC, ceiling 400 LOC — larger ones get split. **Auto-merge** — only on the §3 conditions. **With customers — two reviewers**, one of whom is senior+. **Mutation testing** for critical modules: AI loves writing "always green" tests (>99% of generated tests pass on semantically modified programs — Haroon et al. 2026; see Appendix D). Tests are written in a separate request or by another person (Meta JiTTests: 4× growth in caught defects with independent generation).
+You are not hunting for typos, but for: hallucinated APIs, tautological tests, deleted asserts, excessive abstractions, hidden scope expansion. **PR-size:** target ≤200 LOC, ceiling 400 LOC — larger ones get split. **Auto-merge** — only on the §3 conditions. **With customers — two reviewers**, one of whom is senior+. **Mutation testing** for critical modules checks whether tests catch introduced defects. Haroon et al. 2026 studies generated tests under program changes, not the share of tests that miss mutations (Appendix D); the mutation-testing requirement is the author's policy. Tests are written in a separate request or by another person.
 
 **AI review advises, a human decides.** An AI reviewer is useful before the human — for bugs, security, and conformance to the spec and the plan, without style nits; in every documented large-scale deployment it does not block the merge on its own (Uber, Atlassian — Appendix D). An agent does not review itself: models judge their own output more leniently than others' (self-attribution bias). **Human review capacity is a resource** (§9): small PRs and a preliminary AI review save it.
 
@@ -160,9 +162,9 @@ The shortcode is used as `#shortcode` in a PR comment or as a label — it is a 
 | 8 | `#slot-machine` | A third or later prompt on the same error without reading the diff, asking a human, or attempting to reproduce with a bug-test | 15 iterations of "try again / use another library / just try" in an hour; the diff was never opened, no failing test written | §4 I (three-prompt rule) |
 | 9 | `#self-auto` | Delegated an entire workflow to AI without engagement. Neither domain expertise nor AI skill grows (Mollick et al. / BCG, 758 consultants, 2023: Centaur and Cyborg deepen expertise, Self-Automator does not) | Over a month all PRs closed via `claude code --auto`; at the retro you cannot explain a single architectural change | §4 I |
 | 10 | `#confident-wrong` | Confident in the correctness or safety of AI code that you have not verified with an explicit check (Stanford/Perry CCS 2023) | "Sure there's no SQL injection — Claude uses parameterization"; Semgrep not run, the resulting SQL query not read | §4 VII |
-| 11 | `#tautological` | Tests written by the same agent that wrote the code; mutation testing on a critical module not run or not passed (>99% of generated tests pass on semantically modified programs — Haroon et al. 2026) | `assert get_user(1).id == get_user(1).id` — green; mutation testing catches 0% | §4 VII, §7 item 3 |
-| 12 | `#sycophancy` | AI checks AI without a human: an agent reviews its own output, or AI review replaces human review (self-attribution bias: models are more lenient to their own output) | PR from Cursor → CodeRabbit-bot stamps "LGTM, well-structured code" → auto-merge on → merged without human eyes | §4 VII, §7 |
-| 13 | `#zombie` | A prototype lives past 30 days without moving to Production or deletion; or Production code without an owner and commits lives past its retirement date | `lambda-monitoring` written as a prototype "for the evening" in August 2025; today a Grafana dashboard of three teams depends on it, owner unknown | §2, §4 II, DoD #6 |
+| 11 | `#tautological` | Tests written by the same agent that wrote the code; mutation testing on a critical module not run or not passed | `assert get_user(1).id == get_user(1).id` — green; mutation testing catches 0% | §4 VII, §7 item 3 |
+| 12 | `#sycophancy` | An agent presents its self-check as review, or AI review replaces the required human check; permitted auto-merge has only the §3 conditions (self-attribution bias: models are more lenient to their own output) | PR from Cursor → CodeRabbit-bot stamps "LGTM, well-structured code" → auto-merge without meeting §3 conditions → merged without the required human check | §4 VII, §7 |
+| 13 | `#zombie` | A prototype lives past 30 days without moving to Production or deletion; or Production remains in use with confirmed absence of ownership and support, or past a retirement date explicitly set by its owner | Illustrative example: three teams use `lambda-monitoring`; a review confirmed the absence of both an owner and support | §2, §4 II, DoD #6 |
 
 **The list is closed.** The thirteen shortcodes are a normalized vocabulary; a reviewer does not invent names. The list grows only through the Appendix E gate; candidates wait in the `patterns.md` queue and are not rejection shortcodes. The count "thirteen" changes only on promotion.
 
@@ -187,7 +189,7 @@ The shortcode is used as `#shortcode` in a PR comment or as a label — it is a 
 | 8 | SAST without high/critical (Semgrep/CodeQL) | — | ✓ | ✓ | D | NOW | security owner |
 | 9 | License scan green (FOSSA/Snyk) | — | ✓ | ✓ | D | NOW | CI |
 | 10 | Slopsquatting check on new imports; packages from an internal mirror, if you have one | — | ✓ | ✓ | D | NOW | CI |
-| 11 | Two-person rule on merge (CODEOWNERS); whoever assigned the task to an agent does not approve that agent's PR | — | ✓ | ✓ | D | NOW | CI |
+| 11 | Human check per §3: two-person rule (CODEOWNERS) in teams; solo without customers — author check, not independent; auto-merge only per §3 | — | ✓ | ✓ | D / H (solo) | NOW | CI / author (solo) |
 | 12 | Threat model (basic in Production, full with customers) | — | basic | full | H | NOW | security owner |
 | 13 | Lethal-trifecta audit for agents | — | ✓ | ✓ | H | NOW | security owner |
 | 14 | Structured logs + basic observability | — | ✓ | ✓ | H | NOW | author + ops |
@@ -321,11 +323,11 @@ The template references the core of the bible (§§1–10).
 
 **The bottleneck is human review.** AI increases the flow of changes, while the number of reviewers stays the same: DORA 2025 records throughput growing together with instability, vendor data — growth in review time and in waiting time for AI PRs (Appendix D). Plan review capacity in advance: a soft PR-size limit, an AI pre-reviewer in advisory mode, a review-waiting-time metric.
 
-**Gates are enabled by class (§5).** An existing project starts with an audit report (Appendix F). Scale to the team: 1–10 people need §§1–8, §10, and the §7 checklist; from about 10 — a shared service catalog, a single LLM proxy, and shared agent settings; from 100 — a phased rollout plan and explicit owners of the standard.
+**Gates are enabled by class (§5).** An existing project starts with an audit report (Appendix F). Scale to the team: 1–10 people need §§1–8, §10, and the §7 checklist; from about 10 — a shared service catalog, shared access and data-flow controls (an LLM proxy if used), and shared agent settings; from 100 — a phased rollout plan and explicit owners of the standard.
 
-**Infrastructure first, then new access.** Current practice is not stopped. But new agent access — real data, production repositories, customer-facing systems — opens only after an isolated environment, a single LLM proxy, an MCP allow-list, and deterministic gates are in place.
+**Infrastructure first, then new access.** Current practice is not stopped. But new agent access — real data, production repositories, customer-facing systems — opens only after an isolated environment, verifiable access and data-flow controls, an MCP allow-list, and deterministic gates are in place. The controls specify which data and systems the agent can access and where data may be sent; verify their behavior in the environment. An LLM gateway is one implementation, not a mandatory component for every team. Record the chosen mechanism and its verification in baseline §3.1.
 
-**Ownership — an owner group, not a committee.** The standard is developed and rolled out by a few people from the teams already doing this work — one owner per part (environment and agent settings, delivery, checks and evals, security, analysts, adoption). Separately, a **harness owner** is assigned: shared agent settings, the LLM proxy, the skills catalog. The owner group does not approve other people's decisions; each member is responsible for their own part of the environment. In a large organization the owner group may be called a guild — the role matters, not the sign on the door.
+**Ownership — an owner group, not a committee.** The standard is developed and rolled out by a few people from the teams already doing this work — one owner per part (environment and agent settings, delivery, checks and evals, security, analysts, adoption). Separately, a **harness owner** is assigned: shared agent settings, access and data-flow controls (the proxy if used), the skills catalog. The owner group does not approve other people's decisions; each member is responsible for their own part of the environment. In a large organization the owner group may be called a guild — the role matters, not the sign on the door.
 
 **Adoption through paved road, not through mandate.** Large changes in engineering culture work when the right path is the easiest one (Spotify Golden Paths, Netflix paved road). Hard gates without a paved road push teams into large batches and increase blast radius per change (Charity Majors). Rules grow bottom-up: from field corrections (§8) and patterns (Appendix E), and the quarterly review removes what is outdated.
 
@@ -466,8 +468,8 @@ The figures in §1, §4, §4½, and §9 are pinned to publications — they can 
 - Hashimoto, Mitchell. Ghostty policy: AI PRs without author understanding are closed without reading (posts on X).
 - Stanford Social Media Lab + BetterUp Labs. *The Workslop Report.* 2025. — ~$9M/year per 10K employees; 54% of recipients see the sender as less creative, 42% — as less trustworthy.
 - Dell'Acqua, McFowland, Mollick et al. *Navigating the Jagged Technological Frontier.* HBS / BCG / MIT / Wharton, 2023. https://www.hbs.edu/faculty/Pages/item.aspx?num=64700 — 758 BCG consultants; the Centaur / Cyborg / Self-Automator patterns.
-- Meta. *Mutation-Guided LLM-based Test Generation at Meta* (JiTTests / ACH). arXiv 2501.12862 — 4× growth in caught defects with independent generation.
-- Haroon et al. *Evaluating LLM-Based Test Generation Under Software Evolution.* arXiv 2603.23443 — 8 LLMs: "More than 99% of failing SAC tests pass on the original program while executing the modified region".
+- Meta. *Mutation-Guided LLM-based Test Generation at Meta* (ACH). [arXiv 2501.12862v1, full text](https://arxiv.org/html/2501.12862v1), §6, Table 8 (PDF pp. 8–9): compares mutation-guided ACH with coverage-guided TestGen-LLM, not same-author with independent-author generation. It does not support the removed claim "4× with independent generation"; this is a limit of this citation, not a claim that no such effect exists. [self-report]
+- Haroon et al. *Evaluating LLM-Based Test Generation Under Software Evolution.* [arXiv 2603.23443v1](https://arxiv.org/abs/2603.23443v1) — 8 LLMs: more than 99% of tests failing on a semantically changed program (SAC) pass on the original while executing the changed region. This concerns tests targeting the original behavior; it is not a mutation-survival rate or evidence for the mutation-testing requirement. [independent]
 
 **Formulations and terms.**
 
@@ -510,6 +512,10 @@ Local → Submitted → Accepted (patterns.md, advisory)
 **Contribution is opt-in and human-confirmed.** Submitting a pattern and registering are voluntary; the PR to the upstream repo is opened and confirmed by a human, the agent only prepares the draft: a PR to someone else's repo is an outward action, and an agent does not perform it autonomously (Commandment VI).
 
 **Core change log.**
+
+- **2026-10-31** — the owner made 90/180 days without commits signals for support review, rather than automatic statuses, and clarified the Production branch of `#zombie`. The Prototype ≤30-day rule remains. Basis and scope — [ADR 0002](./docs/adr/0002-support-review.md).
+
+- **2026-10-31** — the owner corrected the Haroon interpretation, clarified solo author checks and gateway-independent data controls, and removed unsupported enforcement and test-generation rationales. Auto-merge and customer requirements remain unchanged. Basis and scope — [ADR 0001](./docs/adr/0001-evidence-solo-data-control.md).
 
 - **2.0 (October 2026)** — the first version for adoption and the starting point of the log: two maturity levels with the "+ customers" overlay, the law in the environment, gate classes and the DoD, the loop from spec to outcome with an intent at the input. Core changes after 2.0 go through a reasoned ADR in `docs/adr/`, numbered from 0001. The counts: two covenants, eight commandments, thirteen sins.
 

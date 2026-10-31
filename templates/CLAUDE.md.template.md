@@ -22,6 +22,7 @@ A new language, framework, or heavy runtime dependency — only via ADR and appr
 
 Whatever a machine can check lives in agent settings, hooks, and CI, not here; a rule from this file that a machine can check is a candidate for the environment. Already enforced:
 
+- **Access and data-flow controls:** {{permitted data/systems and destinations; enforcement mechanism and verification; LLM gateway if used}}
 - **Agent settings:** {{command deny-list; allowed MCP servers; permission mode}}
 - **Hooks:** {{e.g. block writes to `.env*`, block force-push; a fail-closed gate on the agent's untrusted input}}
 - **CI, deterministic checks (block immediately):** {{build and tests; secrets; slopsquatting check; SAST high/critical; license scan; CODEOWNERS; detector of weakened checks}}
@@ -83,7 +84,7 @@ The full table is in §5 of the bible; here — only what is not already in §3�
 
 ### Production
 - [ ] README (what it is, how to run it, owner) + CLAUDE.md/AGENTS.md in the root; entry in the service catalog (if one exists)
-- [ ] Two-person rule on merge (CODEOWNERS, for teams of 2+); whoever assigned the task to an agent does not approve that agent's PR
+- [ ] Human check per Bible §3: teams — two-person rule (CODEOWNERS), task author does not approve the agent's PR; solo without customers — author check, not independent review; auto-merge only per §3.1
 - [ ] Branch protection and required reviewers — in the repository settings, out of the agent's reach
 - [ ] Threat model basic (1 page) and a lethal-trifecta audit for agents
 - [ ] Structured logs to stdout + basic observability; LLM budget cap, fail-closed — if you have an LLM proxy
