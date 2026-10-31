@@ -23,7 +23,7 @@ Instructions for agents editing the "Vibe Engineering Bible" repo. File map — 
 | A §4½ sin | "Sins here" in the §4 commandment, the §10 glossary, consequences in §7 of the template, `review-pr.md`, `audit-project.md`, `audit-report.md`; every sin has a root in §4/§5/§7; a new sin — the "thirteen" count everywhere (intro, §4½, glossary, Appendix E, coda, README, this file) |
 | §9 (metrics, ownership) | `usage.md` §1 (roles) |
 | A figure or CVE in any file | the source in Appendix D (label [independent] / [vendor] / [self-report]) |
-| Appendix E | `patterns.md`, `registry.md`, `CONTRIBUTING.md`, `docs/adr/` |
+| Appendix E | `patterns.md`, `registry.md`, `CONTRIBUTING.md`, core change log in Appendix E |
 | Appendix F | `usage.md` (modes table), `playbooks/`, `templates/audit-report.md`, `registry.md`: modes, check classes, consequences |
 
 ## What not to do

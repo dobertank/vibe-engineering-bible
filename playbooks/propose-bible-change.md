@@ -37,7 +37,7 @@ Keep the bible alive but not noisy: new rules come from repeated facts, not from
    - `vibe-engineering-bible.md` — the canon changes: commandment, DoD, sin, glossary, appendix.
    - `README.md` / `usage.md` — navigation and user flow change.
 4. If a machine can check the rule, first propose moving it into the environment (managed settings, hooks, CI) rather than adding it to the text.
-5. For the core (§4 commandments, §4½ sins, §5 DoD) — only through the Appendix E gate (confirmation threshold, candidate, cadence): an entry in `patterns.md` → candidate → a reasoned ADR in `docs/adr/`.
+5. For the core (§4 commandments, §4½ sins, §5 DoD) — only through the Appendix E gate (confirmation threshold, candidate, cadence): an entry in `patterns.md` → candidate → a reasoned ADR in the proposal/PR text.
 6. Write the proposal in the format below; for the core — an ADR.
 7. Cross-check the affected files against the "you edit X → check Y" table in the bible repo's `AGENTS.md`.
 8. If there are figures, CVEs, or studies — update Appendix D in the same change.
@@ -70,7 +70,7 @@ Type: <add / change / remove outdated / move from text into the environment>
 <Under which facts to reject it or keep it as one repo's rule.>
 ```
 
-For the core — a reasoned ADR `docs/adr/<NNNN>-<name>.md` in this format:
+For the core — include the reasoned ADR in the proposal/PR text, using this format:
 
 ```md
 # ADR <NNNN>. <The decision in one sentence>

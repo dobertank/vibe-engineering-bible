@@ -6,12 +6,12 @@ Rules and working playbooks for developers and maintainers using AI assistants. 
 
 The main product is Markdown: the canon, templates, and four playbooks. No skill installation is needed for a first audit. To build and install the four skills locally, see [usage §6](./usage.md#6-playbooks-as-development-agent-skills) (Python 3.9+, standard library only).
 
-## Install v2.1.0-en skills
+## Install v2.1.1-en skills
 
 With Python 3.9+ and git, run from an empty directory:
 
 ```sh
-git clone --branch v2.1.0-en --single-branch --depth 1 https://github.com/dobertank/vibe-engineering-bible.git
+git clone --branch v2.1.1-en --single-branch --depth 1 https://github.com/dobertank/vibe-engineering-bible.git
 cd vibe-engineering-bible
 python3 -B -m unittest discover -s tests -v
 skill_project=$(mktemp -d)
@@ -56,7 +56,7 @@ Check the evidence, choose one fix, and repeat the relevant check. An audit repo
 - **[`playbooks/`](./playbooks/)** — init of a new project, audit of an existing one, pre-PR/PR review, a proposal to change the bible. Each has YAML metadata and an output format; the builder creates a `SKILL.md` router with matching resources.
 - **[`templates/CLAUDE.md.template.md`](./templates/CLAUDE.md.template.md)** — baseline template for AI agents in a product repo; applies to a team of any size.
 - **[`templates/audit-report.md`](./templates/audit-report.md)** — the audit report format; **[`intent.md`](./templates/intent.md)** and **[`REVIEW.md`](./templates/REVIEW.md)** — starter files for a product repo: the intent (§6) and the AI review policy (§7).
-- **[`patterns.md`](./patterns.md)** · **[`registry.md`](./registry.md)** · **[`CONTRIBUTING.md`](./CONTRIBUTING.md)** · **[`docs/adr/`](./docs/adr/)** — **standard evolution** (Appendix E): an advisory catalog of field patterns and a queue of sin candidates, the adoption registry (opt-in), the upstream contribution process, reasoned ADRs on core changes.
+- **[`patterns.md`](./patterns.md)** · **[`registry.md`](./registry.md)** · **[`CONTRIBUTING.md`](./CONTRIBUTING.md)** · **[core change log](./vibe-engineering-bible.md#appendix-e-standard-evolution)** — **standard evolution** (Appendix E): an advisory catalog of field patterns and a queue of sin candidates, the adoption registry (opt-in), the upstream contribution process, a short record of core changes.
 - **[`AGENTS.md`](./AGENTS.md)** — instructions for agents editing this repo: what to cross-check and what not to do (`CLAUDE.md` imports it).
 
 ## How to use

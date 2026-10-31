@@ -13,7 +13,7 @@ ROOT_FILES = (
     "patterns.md", "registry.md", "CONTRIBUTING.md", "AGENTS.md",
     "scripts/package_skills.py", "tests/test_package_skills.py",
 )
-RESOURCE_DIRS = ("playbooks", "templates", "docs/adr", "examples/audit", "assets")
+RESOURCE_DIRS = ("playbooks", "templates", "examples/audit", "assets")
 PLAYBOOKS = (
     "init-project.md", "audit-project.md", "review-pr.md", "propose-bible-change.md",
 )

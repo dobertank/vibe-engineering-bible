@@ -62,7 +62,7 @@ The playbooks are the source of truth. Copying a playbook alone loses dependenci
 
 Each contains a short `SKILL.md` router, the public resources under `references/bible/`, and `SOURCE.json`. All Bible-relative paths resolve from that bundled root; the target project is a separate input. Output belongs in the destination requested by the user, outside skill resources.
 
-For the pinned v2.1.0-en source and local installation, use the [README commands](./README.md#install-v210-en-skills). The commands below build from any reviewed checkout.
+For the pinned v2.1.1-en source and local installation, use the [README commands](./README.md#install-v211-en-skills). The commands below build from any reviewed checkout.
 
 ### Build and check
 

@@ -32,6 +32,6 @@ carries a corporate domain. So:
 ## 3. Editing the files themselves
 
 Editing the bible, the template, or the playbooks directly — follow [`AGENTS.md`](./AGENTS.md): the "you edit X → check Y" table
-and "what not to do". A core change (§4, §4½, §5) — only through the Appendix E gate and a reasoned ADR in [`docs/adr/`](./docs/adr/)
+and "what not to do". A core change (§4, §4½, §5) — only through the Appendix E gate and a reasoned ADR included in the proposal/PR text
 (format — in [`playbooks/propose-bible-change.md`](./playbooks/propose-bible-change.md)). The gate works even with a single maintainer:
 what matters is not the size of the owner group, but that the core does not change by ad-hoc edits on the fly. Commits follow Conventional Commits.

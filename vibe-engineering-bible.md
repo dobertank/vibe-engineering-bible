@@ -513,11 +513,11 @@ Local → Submitted → Accepted (patterns.md, advisory)
 
 **Core change log.**
 
-- **2026-10-31** — the owner made 90/180 days without commits signals for support review, rather than automatic statuses, and clarified the Production branch of `#zombie`. The Prototype ≤30-day rule remains. Basis and scope — [ADR 0002](./docs/adr/0002-support-review.md).
+- **2026-10-31** — the owner made 90/180 days without commits signals for support review, rather than automatic statuses, and clarified the Production branch of `#zombie`. The Prototype ≤30-day rule remains.
 
-- **2026-10-31** — the owner corrected the Haroon interpretation, clarified solo author checks and gateway-independent data controls, and removed unsupported enforcement and test-generation rationales. Auto-merge and customer requirements remain unchanged. Basis and scope — [ADR 0001](./docs/adr/0001-evidence-solo-data-control.md).
+- **2026-10-31** — the owner corrected the Haroon interpretation, clarified solo author checks and gateway-independent data controls, and removed unsupported enforcement and test-generation rationales. Auto-merge and customer requirements remain unchanged.
 
-- **2.0 (October 2026)** — the first version for adoption and the starting point of the log: two maturity levels with the "+ customers" overlay, the law in the environment, gate classes and the DoD, the loop from spec to outcome with an intent at the input. Core changes after 2.0 go through a reasoned ADR in `docs/adr/`, numbered from 0001. The counts: two covenants, eight commandments, thirteen sins.
+- **2.0 (October 2026)** — the first version for adoption and the starting point of the log: two maturity levels with the "+ customers" overlay, the law in the environment, gate classes and the DoD, the loop from spec to outcome with an intent at the input. Core changes after 2.0 go through the Appendix E gate and a reasoned ADR. The counts: two covenants, eight commandments, thirteen sins.
 
 ---
 

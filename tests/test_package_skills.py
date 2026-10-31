@@ -29,14 +29,13 @@ class PackageSkillsTest(unittest.TestCase):
                     "patterns.md", "registry.md", "CLAUDE.md",
                     "CONTRIBUTING.md", "AGENTS.md"]:
             (self.source / rel).write_text("# Example\nSnapshot content: " + rel + "\n")
-        for rel in ["playbooks", "templates", "docs/adr", "examples/audit", "assets"]:
+        for rel in ["playbooks", "templates", "examples/audit", "assets"]:
             (self.source / rel).mkdir(parents=True)
         for file, name in PLAYBOOKS.items():
             (self.source / "playbooks" / file).write_text(
                 "---\nname: " + name + "\ndescription: Use when this workflow is requested.\n---\n\n# Workflow\nRead templates/report.md.\n")
         (self.source / "templates/report.md").write_text("# Report\nExpected result\n")
         (self.source / "examples/audit/README.md").write_text("# Example\n")
-        (self.source / "docs/adr/README.md").write_text("# Decisions\n")
         (self.source / "assets/example.svg").write_text("<svg/>\n")
         (self.source / "scripts").mkdir()
         if BUILDER.exists():
@@ -108,6 +107,7 @@ class PackageSkillsTest(unittest.TestCase):
     def test_unrelated_files_and_secret_shaped_files_are_not_packaged(self):
         (self.source / ".env").write_text("SYNTHETIC TEST ONLY")
         (self.source / "templates/.env").write_text("SYNTHETIC TEST ONLY")
+        (self.source / "docs").mkdir()
         (self.source / "docs/private-draft.md").write_text("NOT A RESOURCE")
         result = self.build()
         self.assertEqual(result.returncode, 0, result.stderr)
@@ -167,6 +167,23 @@ class PackageSkillsTest(unittest.TestCase):
         result = self.build()
         self.assertNotEqual(result.returncode, 0)
         self.assertFalse(self.output.exists())
+
+    def test_local_decision_records_are_not_required_or_distributed(self):
+        result = self.build()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        local_records = self.source / "docs" / "adr"
+        local_records.mkdir(parents=True)
+        (local_records / "local-note.md").write_text("LOCAL TEST NOTE; NOT A PUBLIC RESOURCE\n")
+        second = self.work / "with-local-records"
+        result = self.build(second)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        for name in PLAYBOOKS.values():
+            for output in [self.output, second]:
+                package = output / name
+                self.assertFalse((package / "references/bible/docs/adr").exists())
+                manifest = json.loads((package / "SOURCE.json").read_text())
+                self.assertFalse(any(path.startswith("references/bible/docs/adr/")
+                                     for path in manifest["files"]))
 
     def test_missing_dependency_is_rejected_before_install(self):
         (self.source / "vibe-engineering-bible.md").unlink()
