@@ -7,7 +7,7 @@
     "references/bible/CLAUDE.maintenance.md": "8cc178c7fe3177412dc939703a1541dd46dbaa620a1dbd569ec9f4aaf416f5e4",
     "references/bible/CONTRIBUTING.md": "f064ea3a25d5325789809e8fe80edfeff1f9d290919b423d184addd5e5331433",
     "references/bible/LICENSE": "8439ea902080f8df1f62c8beb21ef7514c916970d2eb7dba7303e29b908076e8",
-    "references/bible/README.md": "e82d1c38666f22b80aa404ca51021938d5e6484ab83c52909aa3f1b47df58cf0",
+    "references/bible/README.md": "fe50ae3a82a316fe58b34e73448668f874f498fd7848516c5ce00cf393817c1d",
     "references/bible/assets/banner-en.jpg": "1995bad08e5cf47f1a6e80738b2ae236cf7591b4ad8bda0e902108c8c7a64eb4",
     "references/bible/examples/audit/README.md": "8c1521f1cda79c45d2ccc435163c5f237b3e9d2ecdd3686d2f0c678fc25c31d0",
     "references/bible/examples/audit/fixture/README.md": "2d0f9eecd7b6066189a2759c32ca39ddfccb8b1c29a4d2e9985f476862d493fa",
@@ -26,10 +26,10 @@
     "references/bible/templates/audit-report.md": "9837d022149f14b1610058afb9c879f7fc485438fb44d9a64417611931855804",
     "references/bible/templates/intent.md": "3546ff8c276cbd1614dcbbd0ad11fba4c49d337e2533f2d0be9423c3e4387f29",
     "references/bible/tests/test_package_skills.py": "e919300ed53d4105b3cd12e69bb1541ed37506236c13a81672e821b811c07578",
-    "references/bible/usage.md": "32a7b70cf7843576f999831f7afaa12241ad96f87a3f0817dcc0e10a86c30202",
+    "references/bible/usage.md": "2e6cf0ed8e4ec9b84eb246d3bc1407128eb71bff384b3b051c1ff84f28ec837e",
     "references/bible/vibe-engineering-bible.md": "171d6716c0e227c53f9d97b280bc0e5989fdf04281a3e2430a440cb7de204f45"
   },
   "kind": "local-snapshot",
   "playbook": "playbooks/init-project.md",
-  "source_snapshot_sha256": "779d05d0108454255555cf7b13eae3becfcf44f7df97bdcde9639b82e7a2a43b"
+  "source_snapshot_sha256": "b8edbe454b05f06a03fcf68a2eb348864665fe243bbb3a10a6d6452eaf1eed82"
 }

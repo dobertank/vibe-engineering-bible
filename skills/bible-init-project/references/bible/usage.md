@@ -51,7 +51,7 @@ Check classes (D / P / H) and the "advisory → calibration → block" path — 
 
 ## 6. Playbooks as development-agent skills
 
-The local candidate ships four ready folders under `skills/`; installation does not run Python. The [README installation](./README.md#install-ready-skills-local-candidate) uses a local checkout because these folders have not been published yet. The existing `v2.1.1-en` release is the earlier builder-based package, not this candidate.
+The published `main` ships four ready folders under `skills/`; installation does not run Python. Start with the [README audit installation](./README.md#install-ready-skills). The existing `v2.1.1-en` tag predates these ready folders.
 
 | Skill | Use | Source |
 |---|---|---|
@@ -65,6 +65,22 @@ Use the audit first when assessing an existing repository. A feature request doe
 Each `SKILL.md` is generated from its source playbook's contract. It includes triggers, exclusions, inputs, output, reading order and boundaries. All Bible paths resolve under its adjacent `references/bible/`; the target project is a separate input. No separate Bible checkout or builder execution is needed during use. Keep each entire folder with its `SOURCE.json` and MIT LICENSE.
 
 The bundle keeps the full public corpus and banner. Bible-maintenance instructions are retained as inert `AGENTS.maintenance.md` and `CLAUDE.maintenance.md`, with their maintenance links/import mapped to those names. They are not active target instructions. Actual target instructions and the user's requested language govern responses. The original root AGENTS/CLAUDE are unchanged and still apply when maintaining this repository.
+
+### Version-pinned installation
+
+The README command follows the moving `main` branch. To install all four from the available immutable published commit, run this from the target project:
+
+```sh
+DISABLE_TELEMETRY=1 DO_NOT_TRACK=1 npx --yes skills@1.7.4 add https://github.com/dobertank/vibe-engineering-bible/tree/2b0ed7628f80ead02979100e254cff0d628dceb7 --copy --agent codex --skill bible-audit-project bible-init-project bible-review-pr bible-propose-change --yes
+```
+
+Use the `v2.2.0-en` release-tag command below **only after confirming that the tag exists and points to the intended release commit**. If it is unavailable, use the published commit above:
+
+```sh
+DISABLE_TELEMETRY=1 DO_NOT_TRACK=1 npx --yes skills@1.7.4 add https://github.com/dobertank/vibe-engineering-bible/tree/v2.2.0-en --copy --agent codex --skill bible-audit-project --yes
+```
+
+The pinned CLI supports this URL/ref syntax. Syntax validation does not establish that a particular tag exists or installs correctly; verify the tag before use. The older `v2.1.1-en` tag lacks the ready folders. Source formats and project-local copy options are described in the [official CLI reference](https://github.com/vercel-labs/skills/blob/main/docs/commands.md#skills-add); the pinned CLI also supports commit refs. For local or offline use, pass the path to a verified downloaded checkout instead of the URL; keep the same flags. Preserve the entire skill folder and review any existing installation before replacement.
 
 ### Maintaining the generated skills
 
@@ -85,6 +101,8 @@ The bundled maintenance source can regenerate packages into a fresh destination 
 
 ### Verification limits
 
-Packaging checks cover metadata, content identity, complete references/license, inert maintenance instructions, relocation, refusal behavior and freshness. Real local CLI installation and bounded synthetic Codex cases are recorded separately in local implementation evidence; neither structural checks nor a small behavioral comparison proves effectiveness, whole-system safety or compatibility with every client. Claude execution is not established. The [public example](./examples/audit/README.md) supports reproducing its facts and one fix/recheck, not scoring an agent.
+Packaging was checked with 21 unit tests, freshness, content hashes, complete resources/MIT, inert maintenance instructions and relocation. A clean local install of all four skills with official CLI 1.7.4 was verified from the published `main`; packaging checks and model behavior are separate evidence.
+
+Six bounded synthetic Codex tasks were each run with and without skills: both arms met their functional criteria. This does not establish a skill advantage, statistical effectiveness, whole-system safety or compatibility with every client. During those runs, 22 automatic login-shell attempts to read an external profile were denied; the strict zero-attempt criterion failed. No profile content was observed, and no full OS audit was performed. Claude execution is not established. The [public example](./examples/audit/README.md) reproduces its facts and one fix/recheck, not an agent benchmark.
 
 Local installation does not make a hosted model local. Use only a model and data scope already authorized by the project owner; keep access/data-flow controls. A skill grants no additional external permissions. Registration is opt-in; the agent prepares a draft and a human opens any upstream PR.

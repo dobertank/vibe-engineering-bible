@@ -4,7 +4,7 @@
 
 Rules and working playbooks for developers and maintainers using AI assistants. Start with a repository audit: findings tied to evidence, Bible requirements, and minimal fixes. A human decides what to change.
 
-The main product is Markdown: the canon, templates, and four playbooks. Start with an audit, compare the evidence, and choose one fix. The local candidate also includes four ready skills; [installation](#install-ready-skills-local-candidate) does not require Python. Python is only a [maintenance tool](./usage.md#maintaining-the-generated-skills).
+The main product is Markdown: the canon, templates, and four playbooks. Start with an audit, compare the evidence, and choose one fix. The repository includes four ready skills; [installation](#install-ready-skills) does not require Python. Python is only a [maintenance tool](./usage.md#maintaining-the-generated-skills).
 
 ## First audit
 
@@ -28,15 +28,19 @@ Try it on [the synthetic fixture](./examples/audit/fixture/) using the scope in 
 
 Check the evidence, choose one fix, and repeat the relevant check. An audit report does not certify project safety; unverified checks remain visible. The example is synthetic and is not a benchmark or a registered adoption.
 
-## Install ready skills (local candidate)
+<a id="install-ready-skills-local-candidate"></a>
 
-Publication is pending. The published `v2.1.1-en` does not contain these ready skill folders; use this local candidate, not an unannounced GitHub install command. From your target project, with Node.js 22.20+:
+## Install ready skills
+
+Ready skills are published on `main`. From your target project, with Node.js 22.20+:
 
 ```sh
-DISABLE_TELEMETRY=1 DO_NOT_TRACK=1 npx --yes skills@1.7.4 add /absolute/path/to/this/local/checkout --copy --agent codex --skill bible-audit-project --yes
+DISABLE_TELEMETRY=1 DO_NOT_TRACK=1 npx --yes skills@1.7.4 add https://github.com/dobertank/vibe-engineering-bible/tree/main --copy --agent codex --skill bible-audit-project --yes
 ```
 
-This copies the ready audit skill into the current project's local skills directory. Start a fresh agent session, then use the first-audit prompt above. Choose `bible-init-project`, `bible-review-pr` or `bible-propose-change` for the other scenarios; [usage §6](./usage.md#6-playbooks-as-development-agent-skills) lists all four. The npm runner may fetch its pinned CLI on first use; the skill itself needs only its installed files, without Python or access to the original checkout. Review source and permissions before use.
+This copies the audit skill into the current project's local skills directory. Start a fresh agent session, then use the first-audit prompt above. Choose `bible-init-project`, `bible-review-pr` or `bible-propose-change` for the other scenarios; [usage §6](./usage.md#6-playbooks-as-development-agent-skills) lists all four.
+
+`main` can change. For an immutable published commit and a release-tag command, see [version-pinned installation](./usage.md#version-pinned-installation). The older `v2.1.1-en` tag predates the ready folders. The npm runner may fetch the pinned CLI on first use; using the installed skill needs neither Python nor the original checkout. Review source and permissions before use.
 
 **Version 2.0 · October 2026** — the first version for adoption. Core changes after it go through a reasoned ADR (Appendix E of the bible).
 
